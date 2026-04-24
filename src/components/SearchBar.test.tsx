@@ -128,6 +128,41 @@ describe("SearchBar", () => {
     });
   });
 
+  it("calls GitHub when the accessible search button is clicked", async () => {
+    // Arrange
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        login: "octocat",
+        name: "The Octocat",
+        avatar_url: "https://example.test/avatar.png",
+        type: "User",
+        email: "octocat@example.test",
+        followers: 42,
+        company: "GitHub",
+      },
+    });
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(
+      screen.getByPlaceholderText("Pesquise um perfil do GitHub"),
+      {
+        target: { value: "octocat" },
+      }
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: "Pesquisar perfil do GitHub" })
+    );
+
+    // Assert
+    await waitFor(() => {
+      expect(mockedAxios.get).toHaveBeenCalledWith(
+        "https://api.github.com/users/octocat"
+      );
+    });
+  });
+
   it("shows an error toast when GitHub rejects the lookup", async () => {
     // Arrange
     mockedAxios.get.mockRejectedValueOnce(new Error("not found"));

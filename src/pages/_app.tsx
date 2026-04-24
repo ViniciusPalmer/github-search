@@ -1,9 +1,9 @@
 import "../styles/tailwind.css";
-import "../styles/global.scss";
 
+import type { AppProps } from "next/app";
 import { RepoConsultingProvider } from "../contexts/RepoConsultingContext";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RepoConsultingProvider>
       <Component {...pageProps} />

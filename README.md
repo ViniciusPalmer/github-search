@@ -42,7 +42,7 @@ Serve a build gerada pelo `yarn build`.
 - `src/contexts/RepoConsultingContext.tsx`: estado global de autenticacao, busca e listas.
 - `src/components/SearchBar.tsx`: busca perfis na API do GitHub.
 - `src/components/SearchResult.tsx`: exibe o perfil e busca repositorios ou starred.
-- `src/styles`: estilos Sass globais, variaveis e CSS Modules por componente/pagina.
+- `src/styles/tailwind.css`: entrada do Tailwind CSS v4 com tokens de design em `@theme`, estilos base em `@layer base` e utilitarios app-owned minimos.
 - `public`: imagens e icones usados pela interface.
 
 ## Uso
@@ -57,15 +57,14 @@ Serve a build gerada pelo `yarn build`.
 
 - O OAuth do GitHub esta configurado diretamente em `src/components/LoginWithGitHub.tsx` com `redirect_uri=http://localhost:3000/`.
 - O app nao troca o `code` OAuth por token no servidor; ele considera uma query string na URL como login valido e salva `token@myToken` no `localStorage`.
-- Nao ha scripts configurados para lint, testes ou typecheck isolado no `package.json`.
-- `yarn tsc --noEmit` falha atualmente antes de checar o codigo por causa de `target: "es5"` com TypeScript 6.
+- Tailwind CSS v4 e o unico sistema de estilos app-owned; mantenha `@import "tailwindcss";` para preservar os defaults e adicione novos tokens semanticamente em `@theme`.
 
 ## Contribuindo
 
 Antes de abrir uma alteracao, rode pelo menos:
 
 ```bash
-yarn build
+yarn validate
 ```
 
-Mantenha o padrao atual de Sass Modules por componente e preserve o idioma das telas existentes, que hoje mistura portugues e ingles.
+Use classes Tailwind estaticas e preserve o idioma das telas existentes, que hoje mistura portugues e ingles.
