@@ -2,6 +2,11 @@
 
 # agents
 AGENTS.md
+.agents/
+.claude/
+.cursor/
+.windsurf/
+
 
 # dependencies
 /node_modules
@@ -9,7 +14,7 @@ AGENTS.md
 .pnp.js
 
 # testing
-/coverage
+/coverage 
 
 # next.js
 /.next/
@@ -21,6 +26,7 @@ AGENTS.md
 # misc
 .DS_Store
 *.pem
+*.tsbuildinfo
 
 # debug
 npm-debug.log*
@@ -37,5 +43,5 @@ yarn-error.log*
 .vercel
 
 # docs and plans
-.docs
+#.docs
 
