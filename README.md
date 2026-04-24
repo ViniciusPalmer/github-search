@@ -1,4 +1,4 @@
-# compassoUOL
+# github-search
 
 Aplicacao web para autenticar com GitHub e consultar perfis, repositorios e projetos favoritados de usuarios.
 
