@@ -14,11 +14,57 @@
   --color-scrollbar-track: rgb(202 202 202);
   --color-scrollbar-thumb-hover: #555;
 
+  --color-auth-bg-start: #1b0b3b;
+  --color-auth-bg-mid: #090114;
+  --color-auth-bg-end: #04000c;
+  --color-auth-card: #0b0518e6;
+  --color-auth-panel: #080312;
+  --color-auth-terminal: #05000d;
+  --color-auth-terminal-tile: #120724;
+  --color-auth-border: #2c1748;
+  --color-auth-border-strong: #3a1d5f;
+  --color-auth-text-primary: #f8f2ff;
+  --color-auth-text-secondary: #a596b8;
+  --color-auth-text-muted: #6e5f84;
+  --color-auth-eyebrow: #bfa7ff;
+  --color-auth-violet: #8b5cf6;
+  --color-auth-magenta: #d946ef;
+  --color-auth-cyan: #22d3ee;
+
+  --color-background: var(--color-auth-bg-mid);
+  --color-foreground: var(--color-auth-text-primary);
+  --color-card: var(--color-auth-card);
+  --color-card-foreground: var(--color-auth-text-primary);
+  --color-primary: var(--color-auth-violet);
+  --color-primary-foreground: var(--color-auth-text-primary);
+  --color-secondary: var(--color-auth-panel);
+  --color-secondary-foreground: var(--color-auth-text-primary);
+  --color-muted: var(--color-auth-terminal-tile);
+  --color-muted-foreground: var(--color-auth-text-secondary);
+  --color-accent: var(--color-auth-magenta);
+  --color-accent-foreground: var(--color-auth-text-primary);
+  --color-destructive: #ef4444;
+  --color-border: var(--color-auth-border);
+  --color-input: var(--color-auth-border-strong);
+  --color-ring: var(--color-auth-cyan);
+
   --font-roboto: Roboto, sans-serif;
+  --font-auth-title: Inter, sans-serif;
+  --font-auth-body: Geist, sans-serif;
+  --font-auth-label: "Funnel Sans", sans-serif;
 
   --shadow-result: 1px 3px 10px var(--color-app-background);
   --shadow-result-hover: 0 1.5px 5px var(--color-surface-overlay);
   --shadow-avatar: 0 1px 3px rgb(0 0 0 / 61%);
+  --shadow-auth-card: 0 18px 42px rgb(0 0 0 / 40%), 0 0 42px rgb(139 92 246 / 20%);
+  --shadow-auth-panel: 0 12px 24px rgb(0 0 0 / 50%);
+  --shadow-auth-button: 0 8px 24px #3b176d;
+
+  --radius-auth-card: 8px;
+  --radius-auth-control: 4px;
+  --radius-lg: var(--radius-auth-card);
+  --radius-md: var(--radius-auth-control);
+  --radius-sm: 3px;
 
   --animate-loading-spin: loading-spin 0.8s linear infinite;
 

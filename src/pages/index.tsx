@@ -6,9 +6,15 @@ import { SearchBar } from "../components/SearchBar";
 export default function Home() {
   const { isLogged } = useContext(RepoConsultingContext);
 
+  if (!isLogged) {
+    return <LoginWithGithub />;
+  }
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
-      <div>{isLogged ? <SearchBar /> : <LoginWithGithub />}</div>
+      <div>
+        <SearchBar />
+      </div>
     </div>
   );
 }
