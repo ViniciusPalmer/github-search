@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables.scss" as *;
 
 .SearchResultContainer {
   padding: 1.5rem;

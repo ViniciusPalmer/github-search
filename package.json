@@ -8,24 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/react-icons": "^3.0.0",
-    "@types/react-toastify": "^4.1.0",
-    "axios": "^0.21.1",
-    "axios-oauth-client": "^1.4.0",
-    "axios-token-interceptor": "^0.2.0",
-    "next": "10.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.2.0",
-    "react-loading": "^2.0.3",
-    "react-login-github": "^1.0.7",
-    "react-toastify": "^7.0.4",
-    "sass": "^1.32.12"
+    "axios": "^1.15.2",
+    "next": "16.2.4",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "react-icons": "^5.6.0",
+    "react-toastify": "^11.1.0",
+    "sass": "^1.99.0"
   },
   "devDependencies": {
-    "@types/node": "^15.0.1",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
-    "typescript": "^4.2.4"
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
   }
 }

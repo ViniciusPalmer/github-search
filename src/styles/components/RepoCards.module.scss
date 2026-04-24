@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables.scss" as *;
 
 .RepoCardsContainer {
   display: flex;
@@ -21,7 +21,7 @@
   background: $font;
 }
 
-RepoCardsContainer::-webkit-scrollbar.-thumb:hover {
+.RepoCardsContainer::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 

@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables.scss" as *;
 
 .container {
   width: 100vw;
@@ -14,7 +14,18 @@
   background: $backgroundOpacity;
 }
 
-.container svg {
-  transform: none !important;
+.loader {
+  width: 124px;
+  height: 124px;
+  border: 8px solid rgba(255, 255, 255, 0.25);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
   cursor: wait;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

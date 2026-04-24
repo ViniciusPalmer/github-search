@@ -1,5 +1,5 @@
 //css models
-@import "./variables.scss";
+@use "./variables.scss" as *;
 
 * {
   margin: 0px;
