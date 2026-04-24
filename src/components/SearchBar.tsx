@@ -1,38 +1,78 @@
-import { useState, useContext, type KeyboardEvent } from "react";
+import { useState, useContext, type FormEvent, useCallback } from "react";
 import axios, { type AxiosResponse } from "axios";
 
-import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
-import { BsSearch } from "react-icons/bs";
-import { LoadingScreen } from "./LoadingScreen";
+import {
+  RepoConsultingContext,
+  type ILastSearchUser,
+} from "../contexts/RepoConsultingContext";
 import { SearchResult } from "./SearchResult";
 import { RepoCards } from "./RepoCards";
 import { StarredCards } from "./StarredCards";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserSearchResults } from "./UserSearchResults";
 
-interface ILastSearchUser {
+interface GitHubUserSearchResponse {
+  total_count: number;
+  incomplete_results: boolean;
+  items: GitHubUserSearchItem[];
+}
+
+interface GitHubUserSearchItem {
   login: string;
-  name: string;
+  id: number;
+  node_id: string;
   avatar_url: string;
+  url: string;
+  html_url: string;
   type: string;
-  mail: string;
-  followers: number;
-  company: string;
+  site_admin: boolean;
+  score: number;
 }
 
 interface GitHubUserResponse {
   login: string;
-  name: string;
+  name: string | null;
   avatar_url: string;
   type: string;
-  email: string;
+  email: string | null;
   followers: number;
-  company: string;
+  company: string | null;
+}
+
+const GITHUB_API_HEADERS = {
+  Accept: "application/vnd.github+json",
+  "X-GitHub-Api-Version": "2022-11-28",
+};
+
+const MAX_USER_RESULTS = 5;
+
+const SEARCH_FILTER_CHIPS = [
+  "match: login",
+  "type: user",
+  "sort: closest",
+  "top 5",
+];
+
+function mapGitHubUserResponse(res: AxiosResponse<GitHubUserResponse>): ILastSearchUser {
+  return {
+    login: res.data.login,
+    name: res.data.name ?? res.data.login,
+    avatar_url: res.data.avatar_url,
+    type: res.data.type,
+    mail: res.data.email,
+    followers: res.data.followers,
+    company: res.data.company,
+  };
 }
 
 export function SearchBar() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [dirName, setDirName] = useState("");
+  const [query, setQuery] = useState("");
+  const [searchedQuery, setSearchedQuery] = useState("");
+  const [userResults, setUserResults] = useState<GitHubUserSearchItem[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [selectedLogin, setSelectedLogin] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState("");
   const {
     lastSearch,
     insertNewSearch,
@@ -42,20 +82,7 @@ export function SearchBar() {
     activeRepo,
   } = useContext(RepoConsultingContext);
 
-  function execTask(res: AxiosResponse<GitHubUserResponse>): void {
-    const templateRes: ILastSearchUser = {
-      login: res.data.login,
-      name: res.data.name,
-      avatar_url: res.data.avatar_url,
-      type: res.data.type,
-      mail: res.data.email,
-      followers: res.data.followers,
-      company: res.data.company,
-    };
-    insertNewSearch(templateRes);
-  }
-
-  async function serchOnGit(): Promise<void> {
+  const closeOpenPanels = useCallback(() => {
     if (repoIsOpen) {
       activeRepo();
     }
@@ -63,54 +90,143 @@ export function SearchBar() {
     if (starredIsOpen) {
       activeStarred();
     }
+  }, [activeRepo, activeStarred, repoIsOpen, starredIsOpen]);
 
-    if (dirName !== "") {
-      setIsLoading(true);
+  const searchOnGitHub = useCallback(async (): Promise<void> => {
+    const normalizedQuery = query.trim();
 
-      await axios
-        .get<GitHubUserResponse>(`https://api.github.com/users/${dirName}`)
-        .then((res) => execTask(res))
-        .catch(() => toast.error("Ops cadastro não encontrado"));
-      setIsLoading(false);
-    }
-  }
-
-  function handleSearchInputKeyDown(
-    event: KeyboardEvent<HTMLInputElement>
-  ): void {
-    if (event.key !== "Enter") {
+    if (normalizedQuery === "") {
       return;
     }
 
-    void serchOnGit();
-  }
+    closeOpenPanels();
+    setIsSearching(true);
+    setStatusMessage("");
+    setSearchedQuery(normalizedQuery);
+    setSelectedLogin(null);
+
+    try {
+      const res = await axios.get<GitHubUserSearchResponse>(
+        "https://api.github.com/search/users",
+        {
+          params: {
+            q: `${normalizedQuery} in:login type:user`,
+            per_page: MAX_USER_RESULTS,
+            page: 1,
+          },
+          headers: GITHUB_API_HEADERS,
+        }
+      );
+      const nextResults = res.data.items.slice(0, MAX_USER_RESULTS);
+
+      setUserResults(nextResults);
+      setStatusMessage(
+        nextResults.length === 0 ? "Nenhum usuario encontrado para esta busca." : ""
+      );
+    } catch {
+      setUserResults([]);
+      setStatusMessage("Nao foi possivel buscar usuarios agora.");
+      toast.error("Nao foi possivel buscar usuarios agora.");
+    } finally {
+      setIsSearching(false);
+    }
+  }, [closeOpenPanels, query]);
+
+  const handleSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>): void => {
+      event.preventDefault();
+      void searchOnGitHub();
+    },
+    [searchOnGitHub]
+  );
+
+  const handleSelectUser = useCallback(
+    async (login: string): Promise<void> => {
+      setSelectedLogin(login);
+      setStatusMessage("");
+
+      try {
+        const res = await axios.get<GitHubUserResponse>(
+          `https://api.github.com/users/${login}`
+        );
+
+        insertNewSearch(mapGitHubUserResponse(res));
+      } catch {
+        setStatusMessage("Nao foi possivel abrir este perfil.");
+        toast.error("Nao foi possivel abrir este perfil.");
+      } finally {
+        setSelectedLogin(null);
+      }
+    },
+    [insertNewSearch]
+  );
 
   return (
     <>
       <ToastContainer />
-      <div className="flex min-h-20 w-[95vw] max-w-[50rem] flex-col items-center justify-center bg-surface py-8 max-[720px]:w-screen max-[720px]:rounded-none max-[720px]:px-8">
-        {isLoading && <LoadingScreen />}
-        <div className="flex h-full w-full flex-row items-center justify-center max-[720px]:justify-start max-[720px]:px-2">
-          <input
-            className="h-1/4 w-[85%] rounded-[10px] border border-border-line bg-transparent px-2 py-4 text-[1.2rem] text-brand-text transition duration-300 ease-linear outline-none focus:border-focus-ring max-[720px]:w-full"
-            type="text"
-            placeholder="Pesquise um perfil do GitHub"
-            onChange={(e) => setDirName(e.target.value)}
-            onKeyDown={handleSearchInputKeyDown}
-          />
-          <button
-            aria-label="Pesquisar perfil do GitHub"
-            className="-ml-11 flex h-11 w-11 items-center justify-center rounded-full transition duration-[800ms] ease-linear focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:outline-none"
-            onClick={serchOnGit}
-            type="button"
-          >
-            <BsSearch aria-hidden="true" size={15} color="white" />
-          </button>
+      <section className="mx-auto flex w-full max-w-[920px] flex-col gap-6 rounded-auth-card border border-auth-border bg-auth-card/90 p-5 shadow-auth-card backdrop-blur-md sm:p-8">
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="github-user-search"
+              className="font-auth-label text-sm font-semibold uppercase tracking-[0.2em] text-auth-text-secondary"
+            >
+              Usuário do GitHub
+            </label>
+            <div className="flex gap-3 max-sm:flex-col">
+              <input
+                id="github-user-search"
+                className="min-h-12 flex-1 rounded-auth-control border border-auth-border-strong bg-auth-terminal px-4 py-3 text-base text-auth-text-primary outline-none transition placeholder:text-auth-text-muted focus:border-auth-cyan focus:ring-2 focus:ring-auth-cyan/40"
+                type="text"
+                placeholder="Pesquise usuários do GitHub"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              <button
+                className="min-h-12 rounded-auth-control bg-auth-violet px-6 font-auth-label text-sm font-semibold uppercase tracking-[0.18em] text-auth-text-primary shadow-auth-button transition hover:bg-auth-magenta focus-visible:ring-2 focus-visible:ring-auth-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-auth-card focus-visible:outline-none disabled:cursor-wait disabled:opacity-70"
+                type="submit"
+                disabled={isSearching}
+              >
+                {isSearching ? "Buscando..." : "Buscar"}
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs text-auth-text-secondary" aria-label="Filtros da busca">
+            {SEARCH_FILTER_CHIPS.map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full border border-auth-border bg-auth-terminal px-3 py-1"
+              >
+                {chip}
+              </span>
+            ))}
+          </div>
+        </form>
+
+        {searchedQuery && (
+          <p className="text-sm text-auth-text-muted">
+            Resultados para <span className="text-auth-text-secondary">{searchedQuery}</span>
+          </p>
+        )}
+
+        {statusMessage && (
+          <p role="status" className="rounded-auth-control border border-auth-border bg-auth-terminal px-4 py-3 text-sm text-auth-text-secondary">
+            {statusMessage}
+          </p>
+        )}
+
+        <UserSearchResults
+          results={userResults}
+          selectedLogin={selectedLogin}
+          onSelect={handleSelectUser}
+        />
+
+        <div className="flex flex-col items-center">
+          {lastSearch && <SearchResult />}
+          <RepoCards />
+          <StarredCards />
         </div>
-        {lastSearch && <SearchResult />}
-        <RepoCards />
-        <StarredCards />
-      </div>
+      </section>
     </>
   );
 }

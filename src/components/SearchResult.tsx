@@ -38,6 +38,10 @@ export function SearchResult() {
     insertNewStarredStorage,
   } = useContext(RepoConsultingContext);
 
+  if (!lastSearch) {
+    return null;
+  }
+
   async function repoSearch(): Promise<void> {
     activeRepo();
 

@@ -1,0 +1,2970 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "01 Login - GitHub",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "radial",
+        "enabled": true,
+        "rotation": 0,
+        "size": {
+          "width": 1.25,
+          "height": 1.1
+        },
+        "colors": [
+          {
+            "color": "#1B0B3B",
+            "position": 0
+          },
+          {
+            "color": "#090114",
+            "position": 0.52
+          },
+          {
+            "color": "#04000C",
+            "position": 1
+          }
+        ],
+        "center": {
+          "y": 0.28
+        }
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "line",
+          "id": "OCUZC",
+          "x": -120,
+          "y": 145,
+          "name": "Neon streak violet",
+          "opacity": 0.55,
+          "rotation": 7,
+          "width": 920,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 6,
+            "fill": "#8B5CF6"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 44
+          }
+        },
+        {
+          "type": "line",
+          "id": "jbjM1",
+          "x": 640,
+          "y": 235,
+          "name": "Neon streak magenta",
+          "opacity": 0.5,
+          "rotation": -9,
+          "width": 840,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 5,
+            "fill": "#D946EF"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 52
+          }
+        },
+        {
+          "type": "line",
+          "id": "SJBoa",
+          "x": 120,
+          "y": 690,
+          "name": "Neon streak cyan",
+          "opacity": 0.42,
+          "rotation": 11,
+          "width": 1180,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 4,
+            "fill": "#22D3EE"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 48
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "r8nHP",
+          "x": 320,
+          "y": -180,
+          "name": "Violet ambient glow",
+          "fill": "#8B5CF61F",
+          "width": 820,
+          "height": 420,
+          "effect": {
+            "type": "blur",
+            "radius": 80
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "LyKe8",
+          "x": 910,
+          "y": 560,
+          "name": "Magenta ambient glow",
+          "fill": "#D946EF1A",
+          "width": 520,
+          "height": 280,
+          "effect": {
+            "type": "blur",
+            "radius": 72
+          }
+        },
+        {
+          "type": "frame",
+          "id": "iN6c6",
+          "x": 380,
+          "y": 86,
+          "name": "Login Platform Card",
+          "clip": true,
+          "width": 680,
+          "fill": "#0B0518E6",
+          "cornerRadius": 8,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#2C1748"
+          },
+          "effect": [
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#00000066",
+              "offset": {
+                "x": 0,
+                "y": 18
+              }
+            },
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#8B5CF633",
+              "blur": 42
+            }
+          ],
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            44,
+            48
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "baKVC",
+              "name": "eyebrow",
+              "fill": "#BFA7FF",
+              "content": "GITHUB REPOSITORY CONSULTING",
+              "fontFamily": "Funnel Sans",
+              "fontSize": 12,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "Lwlgf",
+              "name": "title",
+              "fill": "#F8F2FF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Entre para consultar repositórios GitHub",
+              "lineHeight": 1.05,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 54,
+              "fontWeight": "650"
+            },
+            {
+              "type": "text",
+              "id": "aN3dn",
+              "name": "subtitle",
+              "fill": "#A596B8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Faça login com sua conta GitHub e encontre projetos, donos, linguagens e estatísticas em uma experiência focada.",
+              "lineHeight": 1.45,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 17
+            },
+            {
+              "type": "frame",
+              "id": "lN33I",
+              "name": "GitHub Login Mockup",
+              "clip": true,
+              "width": "fill_container",
+              "height": 286,
+              "fill": "#080312",
+              "cornerRadius": 8,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#3A1D5F"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#00000080",
+                "offset": {
+                  "x": 0,
+                  "y": 12
+                }
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "3OX8O",
+                  "name": "Mockup Top Bar",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "avJ54",
+                      "name": "Window Controls",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "EVGeu",
+                          "name": "dot1",
+                          "fill": "#D946EF",
+                          "width": 10,
+                          "height": 10
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "4fIxC",
+                          "name": "dot2",
+                          "fill": "#8B5CF6",
+                          "width": 10,
+                          "height": 10
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "fUZsQ",
+                          "name": "dot3",
+                          "fill": "#22D3EE",
+                          "width": 10,
+                          "height": 10
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "FLmsQ",
+                      "name": "url",
+                      "fill": "#6E5F84",
+                      "content": "github-search.local/auth",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "U8zfy",
+                  "name": "Auth Terminal",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#05000D",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#221037"
+                  },
+                  "layout": "vertical",
+                  "gap": 13,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "fPTbZ",
+                      "name": "row1",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "Hd3Pw",
+                          "name": "marker1",
+                          "fill": "#8B5CF6",
+                          "width": 8,
+                          "height": 22
+                        },
+                        {
+                          "type": "text",
+                          "id": "XBhOT",
+                          "name": "rowText1",
+                          "fill": "#F8F2FF",
+                          "content": "OAuth GitHub pronto para iniciar",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rmcfW",
+                      "name": "row2",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "COKo3",
+                          "name": "marker2",
+                          "fill": "#D946EF",
+                          "width": 8,
+                          "height": 22
+                        },
+                        {
+                          "type": "text",
+                          "id": "XCKe4",
+                          "name": "rowText2",
+                          "fill": "#A596B8",
+                          "content": "Permissões mínimas, busca rápida",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rXjBi",
+                      "name": "row3",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 4,
+                          "id": "RMbHI",
+                          "name": "marker3",
+                          "fill": "#22D3EE",
+                          "width": 8,
+                          "height": 22
+                        },
+                        {
+                          "type": "text",
+                          "id": "Rruo7",
+                          "name": "rowText3",
+                          "fill": "#A596B8",
+                          "content": "Sessão segura antes da pesquisa",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GL4Fk",
+                      "name": "Login Stats",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "1hsGO",
+                          "name": "statA",
+                          "width": "fill_container",
+                          "fill": "#120724",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cq4Id",
+                              "name": "statAValue",
+                              "fill": "#F8F2FF",
+                              "content": "1 click",
+                              "fontFamily": "Inter",
+                              "fontSize": 22,
+                              "fontWeight": "650"
+                            },
+                            {
+                              "type": "text",
+                              "id": "LU5dd",
+                              "name": "statALabel",
+                              "fill": "#8D7BA6",
+                              "content": "login",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.8
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "swdni",
+                          "name": "statB",
+                          "width": "fill_container",
+                          "fill": "#120724",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "XtzlV",
+                              "name": "statBValue",
+                              "fill": "#F8F2FF",
+                              "content": "0 setup",
+                              "fontFamily": "Inter",
+                              "fontSize": 22,
+                              "fontWeight": "650"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ma53N",
+                              "name": "statBLabel",
+                              "fill": "#8D7BA6",
+                              "content": "required",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.8
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ilgK2",
+                          "name": "statC",
+                          "width": "fill_container",
+                          "fill": "#120724",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "nbDDk",
+                              "name": "statCValue",
+                              "fill": "#F8F2FF",
+                              "content": "live",
+                              "fontFamily": "Inter",
+                              "fontSize": 22,
+                              "fontWeight": "650"
+                            },
+                            {
+                              "type": "text",
+                              "id": "2dcas",
+                              "name": "statCLabel",
+                              "fill": "#8D7BA6",
+                              "content": "GitHub data",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.8
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rEHJm",
+              "name": "Login Actions",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ElI69",
+                  "name": "Login with GitHub Button",
+                  "width": 278,
+                  "height": 56,
+                  "fill": "#8B5CF6",
+                  "cornerRadius": 4,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#3B176D",
+                    "offset": {
+                      "x": 0,
+                      "y": 8
+                    }
+                  },
+                  "gap": 10,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "8IKGu",
+                      "name": "githubIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "github",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V9uDh",
+                      "name": "primaryLabel",
+                      "fill": "#FFFFFF",
+                      "content": "Entrar com GitHub",
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
+                      "fontWeight": "650"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Qtzai",
+              "name": "footer",
+              "fill": "#6E5F84",
+              "content": "OAuth via GitHub • Interface responsiva • Busca por usuário e repositório",
+              "fontFamily": "Funnel Sans",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "letterSpacing": 0.7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "jmLfy",
+      "x": 1540,
+      "y": 0,
+      "name": "02 Search",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "radial",
+        "enabled": true,
+        "rotation": 0,
+        "size": {
+          "width": 1.25,
+          "height": 1.1
+        },
+        "colors": [
+          {
+            "color": "#1B0B3B",
+            "position": 0
+          },
+          {
+            "color": "#090114",
+            "position": 0.52
+          },
+          {
+            "color": "#04000C",
+            "position": 1
+          }
+        ],
+        "center": {
+          "y": 0.24
+        }
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "line",
+          "id": "3hGzz",
+          "x": 80,
+          "y": 118,
+          "name": "Neon streak violet",
+          "opacity": 0.48,
+          "rotation": -6.000000000000001,
+          "width": 1180,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 5,
+            "fill": "#8B5CF6"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 46
+          }
+        },
+        {
+          "type": "line",
+          "id": "ZJXu3",
+          "x": 480,
+          "y": 380,
+          "name": "Neon streak magenta",
+          "opacity": 0.44,
+          "rotation": 9,
+          "width": 980,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 6,
+            "fill": "#D946EF"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 54
+          }
+        },
+        {
+          "type": "line",
+          "id": "6YEwy",
+          "x": -80,
+          "y": 760,
+          "name": "Neon streak cyan",
+          "opacity": 0.38,
+          "rotation": -11,
+          "width": 1040,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 4,
+            "fill": "#22D3EE"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 48
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "l6a13",
+          "x": 180,
+          "y": -130,
+          "name": "Search ambient glow",
+          "fill": "#8B5CF61A",
+          "width": 1080,
+          "height": 390,
+          "effect": {
+            "type": "blur",
+            "radius": 90
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "p5a8u",
+          "x": 1060,
+          "y": 530,
+          "name": "Panel ambient glow",
+          "fill": "#D946EF1A",
+          "width": 420,
+          "height": 300,
+          "effect": {
+            "type": "blur",
+            "radius": 76
+          }
+        },
+        {
+          "type": "frame",
+          "id": "alUSH",
+          "x": 100,
+          "y": 42,
+          "name": "Authenticated Nav",
+          "width": 1240,
+          "height": 54,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "38zZ2",
+              "name": "Brand / github-search",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 8,
+                  "id": "k5VTh",
+                  "name": "brandMark",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#8B5CF6",
+                        "position": 0
+                      },
+                      {
+                        "color": "#D946EF",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 34,
+                  "height": 34
+                },
+                {
+                  "type": "text",
+                  "id": "XKHmK",
+                  "name": "brandText",
+                  "fill": "#F8F2FF",
+                  "content": "github-search",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZPWN4",
+              "name": "Session Badge",
+              "fill": "#0B0518CC",
+              "cornerRadius": 4,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#2C1748"
+              },
+              "gap": 8,
+              "padding": [
+                10,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "rnw95",
+                  "name": "statusDot",
+                  "fill": "#34D399",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "iNrqI",
+                  "name": "navBadgeText",
+                  "fill": "#BFA7FF",
+                  "content": "LOGADO COM GITHUB",
+                  "fontFamily": "Funnel Sans",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Adg9x",
+          "x": 260,
+          "y": 124,
+          "name": "Search Hero Copy",
+          "width": 920,
+          "layout": "vertical",
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "0KGpA",
+              "name": "eyebrowSearch",
+              "fill": "#BFA7FF",
+              "content": "BUSCA EM TEMPO REAL",
+              "fontFamily": "Funnel Sans",
+              "fontSize": 12,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "Dv2wX",
+              "name": "titleSearch",
+              "fill": "#F8F2FF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Encontre qualquer repositório pelo GitHub",
+              "lineHeight": 1.08,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 48,
+              "fontWeight": "650"
+            },
+            {
+              "type": "text",
+              "id": "WRy02",
+              "name": "subtitleSearch",
+              "fill": "#A596B8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Digite o nome do repositório, combine com usuário ou explore sugestões populares sem sair do fluxo.",
+              "lineHeight": 1.45,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 17
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "IONyi",
+          "x": 260,
+          "y": 300,
+          "name": "Repository Search Panel",
+          "clip": true,
+          "width": 920,
+          "fill": "#0B0518E6",
+          "cornerRadius": 8,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#2C1748"
+          },
+          "effect": [
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#00000066",
+              "offset": {
+                "x": 0,
+                "y": 18
+              }
+            },
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#8B5CF626",
+              "blur": 48
+            }
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 32,
+          "children": [
+            {
+              "type": "frame",
+              "id": "bC2Aw",
+              "name": "Search Panel Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nI8Xd",
+                  "name": "panelTitle",
+                  "fill": "#F8F2FF",
+                  "content": "Resultados encontrados",
+                  "fontFamily": "Inter",
+                  "fontSize": 22,
+                  "fontWeight": "650"
+                },
+                {
+                  "type": "text",
+                  "id": "e6W0q",
+                  "name": "shortcut",
+                  "fill": "#6E5F84",
+                  "content": "⌘ K",
+                  "fontFamily": "Funnel Sans",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ra6oC",
+              "name": "Search Input",
+              "width": "fill_container",
+              "height": 82,
+              "fill": "#05000D",
+              "cornerRadius": 8,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#3A1D5F"
+              },
+              "gap": 16,
+              "padding": [
+                14,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "4P5Re",
+                  "name": "searchIcon",
+                  "width": 24,
+                  "height": 24,
+                  "iconFontName": "search",
+                  "iconFontFamily": "lucide",
+                  "fill": "#BFA7FF"
+                },
+                {
+                  "type": "frame",
+                  "id": "WSnGc",
+                  "name": "inputCopy",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 5,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zfzJd",
+                      "name": "inputLabel",
+                      "fill": "#6E5F84",
+                      "content": "Repositório ou usuário",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 1.1
+                    },
+                    {
+                      "type": "text",
+                      "id": "UI9NF",
+                      "name": "inputValue",
+                      "fill": "#F8F2FF",
+                      "content": "vinicius",
+                      "fontFamily": "Geist",
+                      "fontSize": 22,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "z7sRy",
+                  "name": "Search Button",
+                  "width": 138,
+                  "height": 54,
+                  "fill": "#8B5CF6",
+                  "cornerRadius": 4,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#3B176D",
+                    "offset": {
+                      "x": 0,
+                      "y": 7
+                    }
+                  },
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h8oyg",
+                      "name": "searchButtonLabel",
+                      "fill": "#FFFFFF",
+                      "content": "Buscar",
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
+                      "fontWeight": "650"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yKtLh",
+              "name": "Search Chips",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ellLz",
+                  "name": "chipA",
+                  "fill": "#180B31",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#3A1D5F"
+                  },
+                  "padding": [
+                    9,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "p1fVf",
+                      "name": "chipAText",
+                      "fill": "#BFA7FF",
+                      "content": "match: nome",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "V80Yy",
+                  "name": "chipB",
+                  "fill": "#10071F",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "padding": [
+                    9,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sDfD1",
+                      "name": "chipBText",
+                      "fill": "#A596B8",
+                      "content": "type: user",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Goz7R",
+                  "name": "chipC",
+                  "fill": "#10071F",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "padding": [
+                    9,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "G7nUK",
+                      "name": "chipCText",
+                      "fill": "#A596B8",
+                      "content": "sort: closest",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lVhPm",
+                  "name": "chipD",
+                  "fill": "#10071F",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "padding": [
+                    9,
+                    12
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6yxZw",
+                      "name": "chipDText",
+                      "fill": "#A596B8",
+                      "content": "top 5",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "k2JtC",
+              "name": "Closest Search Results",
+              "width": "fill_container",
+              "height": 330,
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dNHi2",
+                  "name": "Results List Header",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ga3Cs",
+                      "name": "resultsTitle",
+                      "fill": "#F8F2FF",
+                      "content": "5 usuários mais próximos de \"vinicius\"",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "9V88i",
+                      "name": "resultsHint",
+                      "fill": "#6E5F84",
+                      "content": "Clique em um card para abrir a tela 03",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Nllzj",
+                  "name": "Result Cards List",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "y8JXH",
+                      "name": "Result Card / vinicius-dev",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "m7rAs",
+                        "interaction": "click"
+                      },
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#080312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#3A1D5F"
+                      },
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pOELH",
+                          "name": "name1",
+                          "fill": "#F8F2FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "vinicius-dev",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xvbn7",
+                          "name": "Repos and Stars",
+                          "fill": "#180B31",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3A1D5F"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "3jf95",
+                              "name": "tagText1",
+                              "fill": "#BFA7FF",
+                              "content": "42 repos • 1.8k stars",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 0.7
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "fPYIU",
+                          "name": "action1",
+                          "fill": "#D8CCFF",
+                          "content": "Abrir →",
+                          "fontFamily": "Geist",
+                          "fontSize": 13,
+                          "fontWeight": "650"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WQX1t",
+                      "name": "Result Card / viniciusgoulart",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "m7rAs",
+                        "interaction": "click"
+                      },
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#080312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      },
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YXP6O",
+                          "name": "name2",
+                          "fill": "#F8F2FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "viniciusgoulart",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bTcGq",
+                          "name": "Repos and Stars",
+                          "fill": "#10071F",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hRYNg",
+                              "name": "tagText2",
+                              "fill": "#A596B8",
+                              "content": "31 repos • 924 stars",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 0.7
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "wh4vp",
+                          "name": "action2",
+                          "fill": "#D8CCFF",
+                          "content": "Abrir →",
+                          "fontFamily": "Geist",
+                          "fontSize": 13,
+                          "fontWeight": "650"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "9MyhE",
+                      "name": "Result Card / viniciusreis",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "m7rAs",
+                        "interaction": "click"
+                      },
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#080312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      },
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dKS60",
+                          "name": "name3",
+                          "fill": "#F8F2FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "viniciusreis",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gY9mc",
+                          "name": "Repos and Stars",
+                          "fill": "#10071F",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "N7z0r",
+                              "name": "tagText3",
+                              "fill": "#A596B8",
+                              "content": "24 repos • 602 stars",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 0.7
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "rYElQ",
+                          "name": "action3",
+                          "fill": "#D8CCFF",
+                          "content": "Abrir →",
+                          "fontFamily": "Geist",
+                          "fontSize": 13,
+                          "fontWeight": "650"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DSyfI",
+                      "name": "Result Card / vinicius-santos",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "m7rAs",
+                        "interaction": "click"
+                      },
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#080312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      },
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "7aKcj",
+                          "name": "name4",
+                          "fill": "#F8F2FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "vinicius-santos",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aww8L",
+                          "name": "Repos and Stars",
+                          "fill": "#10071F",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HAIE5",
+                              "name": "tagText4",
+                              "fill": "#A596B8",
+                              "content": "18 repos • 311 stars",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 0.7
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "tIkHJ",
+                          "name": "action4",
+                          "fill": "#D8CCFF",
+                          "content": "Abrir →",
+                          "fontFamily": "Geist",
+                          "fontSize": 13,
+                          "fontWeight": "650"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TrEfh",
+                      "name": "Result Card / viniciusoliveira",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "m7rAs",
+                        "interaction": "click"
+                      },
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#080312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      },
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dUVNb",
+                          "name": "name5",
+                          "fill": "#F8F2FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "viniciusoliveira",
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "6UZhO",
+                          "name": "Repos and Stars",
+                          "fill": "#10071F",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#2C1748"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "31Btl",
+                              "name": "tagText5",
+                              "fill": "#A596B8",
+                              "content": "14 repos • 187 stars",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 0.7
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "idnJa",
+                          "name": "action5",
+                          "fill": "#D8CCFF",
+                          "content": "Abrir →",
+                          "fontFamily": "Geist",
+                          "fontSize": 13,
+                          "fontWeight": "650"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "m7rAs",
+      "x": 3080,
+      "y": 0,
+      "name": "03 Search Results",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "radial",
+        "enabled": true,
+        "rotation": 0,
+        "size": {
+          "width": 1.25,
+          "height": 1.1
+        },
+        "colors": [
+          {
+            "color": "#1B0B3B",
+            "position": 0
+          },
+          {
+            "color": "#090114",
+            "position": 0.52
+          },
+          {
+            "color": "#04000C",
+            "position": 1
+          }
+        ],
+        "center": {
+          "y": 0.24
+        }
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "line",
+          "id": "H2RzK",
+          "x": -40,
+          "y": 164,
+          "name": "Neon streak violet",
+          "opacity": 0.5,
+          "rotation": 8,
+          "width": 1160,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 6,
+            "fill": "#8B5CF6"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 48
+          }
+        },
+        {
+          "type": "line",
+          "id": "CvQCj",
+          "x": 620,
+          "y": 448,
+          "name": "Neon streak magenta",
+          "opacity": 0.44,
+          "rotation": -10,
+          "width": 880,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 5,
+            "fill": "#D946EF"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 54
+          }
+        },
+        {
+          "type": "line",
+          "id": "beNX2",
+          "x": 160,
+          "y": 790,
+          "name": "Neon streak cyan",
+          "opacity": 0.38,
+          "rotation": 12.000000000000002,
+          "width": 1080,
+          "height": 1,
+          "stroke": {
+            "align": "center",
+            "thickness": 4,
+            "fill": "#22D3EE"
+          },
+          "effect": {
+            "type": "blur",
+            "radius": 48
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "XmhKJ",
+          "x": 210,
+          "y": -140,
+          "name": "Result ambient glow",
+          "fill": "#8B5CF61C",
+          "width": 980,
+          "height": 360,
+          "effect": {
+            "type": "blur",
+            "radius": 88
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "wbx9b",
+          "x": 1040,
+          "y": 560,
+          "name": "Result magenta glow",
+          "fill": "#D946EF1A",
+          "width": 440,
+          "height": 300,
+          "effect": {
+            "type": "blur",
+            "radius": 72
+          }
+        },
+        {
+          "type": "frame",
+          "id": "dXu4k",
+          "x": 100,
+          "y": 42,
+          "name": "Results Nav",
+          "width": 1240,
+          "height": 54,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "KuIUg",
+              "name": "Brand / github-search",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 8,
+                  "id": "vr9Oj",
+                  "name": "resultBrandMark",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#8B5CF6",
+                        "position": 0
+                      },
+                      {
+                        "color": "#D946EF",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 34,
+                  "height": 34
+                },
+                {
+                  "type": "text",
+                  "id": "9y2S4",
+                  "name": "resultBrandText",
+                  "fill": "#F8F2FF",
+                  "content": "github-search",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SZjzF",
+              "name": "New Search Button",
+              "width": 138,
+              "height": 42,
+              "fill": "#0B0518CC",
+              "cornerRadius": 4,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#6D46D8"
+              },
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "hEdqC",
+                  "name": "newSearchText",
+                  "fill": "#D8CCFF",
+                  "content": "Nova busca",
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
+                  "fontWeight": "650"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "4wtiJ",
+          "x": 160,
+          "y": 116,
+          "name": "Repository Result Panel",
+          "clip": true,
+          "width": 1120,
+          "height": 720,
+          "fill": "#0B0518E6",
+          "cornerRadius": 8,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#2C1748"
+          },
+          "effect": [
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#00000066",
+              "offset": {
+                "x": 0,
+                "y": 18
+              }
+            },
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#8B5CF62B",
+              "blur": 52
+            }
+          ],
+          "layout": "vertical",
+          "gap": 22,
+          "padding": 30,
+          "children": [
+            {
+              "type": "frame",
+              "id": "f4MC0",
+              "name": "Result Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pzeEX",
+                  "name": "Repository Identity",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "piqT5",
+                      "name": "breadcrumb",
+                      "fill": "#BFA7FF",
+                      "content": "Resultado para usuário vinicius-dev",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 1.5
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pNYHW",
+                      "name": "Repository Title Row",
+                      "width": "fill_container",
+                      "gap": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XH4Nt",
+                          "name": "GitHub Avatar",
+                          "width": 46,
+                          "height": 46,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 135,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#F8F2FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#BFA7FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 8,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#FFFFFF66"
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "bJIXS",
+                              "width": 25,
+                              "height": 25,
+                              "iconFontName": "github",
+                              "iconFontFamily": "lucide",
+                              "fill": "#05000D"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "pmDhF",
+                          "name": "repoName",
+                          "fill": "#F8F2FF",
+                          "content": "vinicius-dev",
+                          "fontFamily": "Inter",
+                          "fontSize": 44,
+                          "fontWeight": "650"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "anPXI",
+                          "name": "visibilityBadge",
+                          "fill": "#180B31",
+                          "cornerRadius": 4,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3A1D5F"
+                          },
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cHP3g",
+                              "name": "visibilityText",
+                              "fill": "#BFA7FF",
+                              "content": "PUBLIC",
+                              "fontFamily": "Funnel Sans",
+                              "fontSize": 11,
+                              "fontWeight": "700",
+                              "letterSpacing": 1.1
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "NmgrX",
+                      "name": "repoDescription",
+                      "fill": "#A596B8",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Perfil GitHub encontrado na busca. Selecione um repositório abaixo para ver o resumo detalhado no painel lateral.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Geist",
+                      "fontSize": 17
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IisTV",
+                  "name": "Freshness Badge",
+                  "fill": "#080312",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "gap": 9,
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "U4DLk",
+                      "name": "healthDot",
+                      "fill": "#34D399",
+                      "width": 9,
+                      "height": 9
+                    },
+                    {
+                      "type": "text",
+                      "id": "KLrY6",
+                      "name": "healthText",
+                      "fill": "#A596B8",
+                      "content": "PERFIL ATIVO",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FIMVz",
+              "name": "Repository Metrics",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "0pVGt",
+                  "name": "Stars Metric",
+                  "width": "fill_container",
+                  "height": 100,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3ps5x",
+                      "name": "metricAValue",
+                      "fill": "#F8F2FF",
+                      "content": "42",
+                      "fontFamily": "Inter",
+                      "fontSize": 30,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "S5tzW",
+                      "name": "metricALabel",
+                      "fill": "#8D7BA6",
+                      "content": "REPOS",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kBOQQ",
+                  "name": "Forks Metric",
+                  "width": "fill_container",
+                  "height": 100,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UV71A",
+                      "name": "metricBValue",
+                      "fill": "#F8F2FF",
+                      "content": "1.8k",
+                      "fontFamily": "Inter",
+                      "fontSize": 30,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "joW1N",
+                      "name": "metricBLabel",
+                      "fill": "#8D7BA6",
+                      "content": "STARS",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nMsxF",
+                  "name": "Issues Metric",
+                  "width": "fill_container",
+                  "height": 100,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9Emud",
+                      "name": "metricCValue",
+                      "fill": "#F8F2FF",
+                      "content": "5",
+                      "fontFamily": "Inter",
+                      "fontSize": 30,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "N4Qw4",
+                      "name": "metricCLabel",
+                      "fill": "#8D7BA6",
+                      "content": "MATCHES",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JpXtg",
+                  "name": "Language Metric",
+                  "width": "fill_container",
+                  "height": 100,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7mwQI",
+                      "name": "metricDValue",
+                      "fill": "#F8F2FF",
+                      "content": "TS",
+                      "fontFamily": "Inter",
+                      "fontSize": 30,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H7NFE",
+                      "name": "metricDLabel",
+                      "fill": "#8D7BA6",
+                      "content": "TOP STACK",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v2LSm",
+              "name": "Repository Detail Body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Qjz6s",
+                  "name": "User Repositories",
+                  "width": 710,
+                  "height": 399,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "8RnXB",
+                      "x": 16,
+                      "y": 14,
+                      "name": "pulseTitle",
+                      "fill": "#F8F2FF",
+                      "content": "Repositórios do usuário",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jDekB",
+                      "x": 16,
+                      "y": 42,
+                      "name": "pulseCaption",
+                      "fill": "#6E5F84",
+                      "content": "Primeiro item selecionado por padrão • clique para atualizar o resumo",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "SaR52",
+                      "x": 16,
+                      "y": 68,
+                      "name": "Repo Card Background / github-search",
+                      "metadata": {
+                        "type": "selected-default",
+                        "updatesNodeId": "pZFUS"
+                      },
+                      "fill": "#180B31",
+                      "width": 678,
+                      "height": 52,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#8B5CF6"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "RCuB1",
+                      "x": 30,
+                      "y": 78,
+                      "name": "cardName1",
+                      "fill": "#F8F2FF",
+                      "content": "github-search",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yLRzG",
+                      "x": 30,
+                      "y": 100,
+                      "name": "cardDesc1",
+                      "fill": "#A596B8",
+                      "content": "Busca GitHub com login OAuth e lista de usuários",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "NpPtD",
+                      "x": 560,
+                      "y": 81,
+                      "name": "Repo Stats / github-search",
+                      "fill": "#2A1450",
+                      "width": 120,
+                      "height": 26,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#6D46D8"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "8xIEI",
+                      "x": 574,
+                      "y": 88,
+                      "name": "statText1",
+                      "fill": "#BFA7FF",
+                      "content": "TS • 42 stars",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "vzqbi",
+                      "x": 16,
+                      "y": 128,
+                      "name": "Repo Card Background / portfolio",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "pZFUS",
+                        "interaction": "click"
+                      },
+                      "fill": "#080312",
+                      "width": 678,
+                      "height": 52,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "peS00",
+                      "x": 30,
+                      "y": 138,
+                      "name": "cardName2",
+                      "fill": "#F8F2FF",
+                      "content": "portfolio-vinicius",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UJBZ8",
+                      "x": 30,
+                      "y": 160,
+                      "name": "cardDesc2",
+                      "fill": "#8D7BA6",
+                      "content": "Site pessoal com projetos e artigos técnicos",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "zTvlo",
+                      "x": 560,
+                      "y": 141,
+                      "name": "Repo Stats / portfolio",
+                      "fill": "#10071F",
+                      "width": 120,
+                      "height": 26,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "z9Aoz",
+                      "x": 574,
+                      "y": 148,
+                      "name": "statText2",
+                      "fill": "#A596B8",
+                      "content": "Next • 31 stars",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "KKdIF",
+                      "x": 16,
+                      "y": 188,
+                      "name": "Repo Card Background / api",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "pZFUS",
+                        "interaction": "click"
+                      },
+                      "fill": "#080312",
+                      "width": 678,
+                      "height": 52,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "cI9w0",
+                      "x": 30,
+                      "y": 198,
+                      "name": "cardName3",
+                      "fill": "#F8F2FF",
+                      "content": "api-github-metrics",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sG0yN",
+                      "x": 30,
+                      "y": 220,
+                      "name": "cardDesc3",
+                      "fill": "#8D7BA6",
+                      "content": "Serviço para normalizar métricas de repositórios",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "MXL4g",
+                      "x": 560,
+                      "y": 201,
+                      "name": "Repo Stats / api",
+                      "fill": "#10071F",
+                      "width": 120,
+                      "height": 26,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "QhGQn",
+                      "x": 574,
+                      "y": 208,
+                      "name": "statText3",
+                      "fill": "#A596B8",
+                      "content": "Node • 24 stars",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "hEf9S",
+                      "x": 16,
+                      "y": 248,
+                      "name": "Repo Card Background / ui-kit",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "pZFUS",
+                        "interaction": "click"
+                      },
+                      "fill": "#080312",
+                      "width": 678,
+                      "height": 52,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "BldDk",
+                      "x": 30,
+                      "y": 258,
+                      "name": "cardName4",
+                      "fill": "#F8F2FF",
+                      "content": "violet-ui-kit",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wXlr9",
+                      "x": 30,
+                      "y": 280,
+                      "name": "cardDesc4",
+                      "fill": "#8D7BA6",
+                      "content": "Componentes visuais para dashboards escuros",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "LUNSe",
+                      "x": 560,
+                      "y": 261,
+                      "name": "Repo Stats / ui-kit",
+                      "fill": "#10071F",
+                      "width": 120,
+                      "height": 26,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "UJpef",
+                      "x": 574,
+                      "y": 268,
+                      "name": "statText4",
+                      "fill": "#A596B8",
+                      "content": "React • 18 stars",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "2SmEF",
+                      "x": 16,
+                      "y": 308,
+                      "name": "Repo Card Background / notes",
+                      "metadata": {
+                        "type": "prototype-link",
+                        "targetNodeId": "pZFUS",
+                        "interaction": "click"
+                      },
+                      "fill": "#080312",
+                      "width": 678,
+                      "height": 52,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "kBOXq",
+                      "x": 30,
+                      "y": 318,
+                      "name": "cardName5",
+                      "fill": "#F8F2FF",
+                      "content": "open-source-notes",
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hkUg9",
+                      "x": 30,
+                      "y": 340,
+                      "name": "cardDesc5",
+                      "fill": "#8D7BA6",
+                      "content": "Notas e guias para contribuição open source",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.4
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "v5gXR",
+                      "x": 560,
+                      "y": 321,
+                      "name": "Repo Stats / notes",
+                      "fill": "#10071F",
+                      "width": 120,
+                      "height": 26,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "YsFfF",
+                      "x": 574,
+                      "y": 328,
+                      "name": "statText5",
+                      "fill": "#A596B8",
+                      "content": "MD • 14 stars",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pZFUS",
+                  "name": "Selected Repository Summary",
+                  "width": 330,
+                  "height": 399,
+                  "fill": "#080312",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#2C1748"
+                  },
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "n5sgq",
+                      "x": 16,
+                      "y": 16,
+                      "name": "summaryTitle2",
+                      "fill": "#F8F2FF",
+                      "content": "Resumo do repositório",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "NB8oa",
+                      "x": 16,
+                      "y": 54,
+                      "name": "summaryBadgeRect",
+                      "fill": "#180B31",
+                      "width": 174,
+                      "height": 28,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#6D46D8"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "j0Y2E",
+                      "x": 26,
+                      "y": 62,
+                      "name": "summaryBadgeText",
+                      "fill": "#BFA7FF",
+                      "content": "SELECIONADO DEFAULT",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "YYjQu",
+                      "x": 16,
+                      "y": 98,
+                      "name": "summaryRepoName",
+                      "fill": "#F8F2FF",
+                      "content": "github-search",
+                      "fontFamily": "Inter",
+                      "fontSize": 28,
+                      "fontWeight": "650"
+                    },
+                    {
+                      "type": "text",
+                      "id": "k1tAL",
+                      "x": 16,
+                      "y": 134,
+                      "name": "summaryRepoDesc",
+                      "fill": "#A596B8",
+                      "textGrowth": "fixed-width",
+                      "width": 298,
+                      "content": "Busca GitHub com login OAuth, listagem de usuários e navegação para detalhes de repositórios.",
+                      "lineHeight": 1.35,
+                      "fontFamily": "Geist",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "a4bce",
+                      "x": 16,
+                      "y": 194,
+                      "name": "metricRect1",
+                      "fill": "#10071F",
+                      "width": 92,
+                      "height": 58,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "zCf3s",
+                      "x": 30,
+                      "y": 204,
+                      "name": "metricValue1",
+                      "fill": "#F8F2FF",
+                      "content": "42",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fy8nw",
+                      "x": 30,
+                      "y": 230,
+                      "name": "metricLabel1",
+                      "fill": "#8D7BA6",
+                      "content": "STARS",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "NtcMn",
+                      "x": 118,
+                      "y": 194,
+                      "name": "metricRect2",
+                      "fill": "#10071F",
+                      "width": 92,
+                      "height": 58,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "MJ0vm",
+                      "x": 132,
+                      "y": 204,
+                      "name": "metricValue2",
+                      "fill": "#F8F2FF",
+                      "content": "12",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TmWEq",
+                      "x": 132,
+                      "y": 230,
+                      "name": "metricLabel2",
+                      "fill": "#8D7BA6",
+                      "content": "FORKS",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 8,
+                      "id": "7GxDU",
+                      "x": 220,
+                      "y": 194,
+                      "name": "metricRect3",
+                      "fill": "#10071F",
+                      "width": 94,
+                      "height": 58,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "KZiaR",
+                      "x": 234,
+                      "y": 204,
+                      "name": "metricValue3",
+                      "fill": "#F8F2FF",
+                      "content": "TS",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uSIvk",
+                      "x": 234,
+                      "y": 230,
+                      "name": "metricLabel3",
+                      "fill": "#8D7BA6",
+                      "content": "STACK",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "4vJYp",
+                      "x": 16,
+                      "y": 274,
+                      "name": "topicsLabel2",
+                      "fill": "#6E5F84",
+                      "content": "TÓPICOS",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 11,
+                      "fontWeight": "700",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "aJYSr",
+                      "x": 16,
+                      "y": 296,
+                      "name": "topicRect1",
+                      "fill": "#180B31",
+                      "width": 58,
+                      "height": 28,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#3A1D5F"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "SeSvw",
+                      "x": 27,
+                      "y": 304,
+                      "name": "topicText1",
+                      "fill": "#BFA7FF",
+                      "content": "github",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "WKwno",
+                      "x": 82,
+                      "y": 296,
+                      "name": "topicRect2",
+                      "fill": "#10071F",
+                      "width": 58,
+                      "height": 28,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "OQU7O",
+                      "x": 93,
+                      "y": 304,
+                      "name": "topicText2",
+                      "fill": "#A596B8",
+                      "content": "nextjs",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "Jjkrx",
+                      "x": 148,
+                      "y": 296,
+                      "name": "topicRect3",
+                      "fill": "#10071F",
+                      "width": 54,
+                      "height": 28,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#2C1748"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "J281n",
+                      "x": 160,
+                      "y": 304,
+                      "name": "topicText3",
+                      "fill": "#A596B8",
+                      "content": "oauth",
+                      "fontFamily": "Funnel Sans",
+                      "fontSize": 10,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.7
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 4,
+                      "id": "Pqwox",
+                      "x": 16,
+                      "y": 342,
+                      "name": "openButtonRect2",
+                      "fill": "#8B5CF6",
+                      "width": 298,
+                      "height": 46,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#3B176D",
+                        "offset": {
+                          "x": 0,
+                          "y": 7
+                        }
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "hFnut",
+                      "x": 105,
+                      "y": 356,
+                      "name": "openButtonText2",
+                      "fill": "#FFFFFF",
+                      "content": "Abrir github-search",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "650"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "imports": {
+    "U": "pencil:shadcn.lib.pen"
+  }
+}

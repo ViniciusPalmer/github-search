@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState, useEffect } from "react";
 
 interface RepoConsultingContext {
   isLogged: boolean;
-  lastSearch: ILastSearchUser;
+  lastSearch: ILastSearchUser | undefined;
   repoIsOpen: boolean;
   starredIsOpen: boolean;
   insertNewSearch: (data: ILastSearchUser) => void;
@@ -35,14 +35,14 @@ interface IStorage {
   token: string;
 }
 
-interface ILastSearchUser {
+export interface ILastSearchUser {
   login: string;
   name: string;
   avatar_url: string;
   type: string;
-  mail: string;
+  mail: string | null;
   followers: number;
-  company: string;
+  company: string | null;
 }
 
 interface ISearchRepo {

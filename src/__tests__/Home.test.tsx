@@ -7,8 +7,8 @@ jest.mock("../components/LoginWithGitHub", () => ({
   LoginWithGithub: () => <div>Login UI</div>,
 }));
 
-jest.mock("../components/SearchBar", () => ({
-  SearchBar: () => <div>Search UI</div>,
+jest.mock("../components/AuthenticatedSearchScreen", () => ({
+  AuthenticatedSearchScreen: () => <div>Search UI</div>,
 }));
 
 type RepoConsultingContextValue = ContextType<typeof RepoConsultingContext>;
