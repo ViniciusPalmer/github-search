@@ -1,70 +1,88 @@
-# github-search
+# GitHub Search ![react](https://www.readmecodegen.com/api/social-icon?name=react&size=24) ![typescript](https://www.readmecodegen.com/api/social-icon?name=typescript&size=24) ![tailwindcss](https://www.readmecodegen.com/api/social-icon?name=tailwindcss&size=24)
 
-Aplicacao web para autenticar com GitHub e consultar perfis, repositorios e projetos favoritados de usuarios.
+GitHub Search is a Next.js web app for discovering GitHub profiles. The current flow starts with a GitHub login screen, lets the user search accounts by login, and opens a detail view with profile information and recent repositories.
 
-- **Interface em React:** a tela principal alterna entre login e busca usando componentes funcionais.
-- **Next.js Pages Router:** as rotas ficam em `src/pages`, com `_app.tsx` configurando o provider global.
-- **Estado compartilhado:** `RepoConsultingContext` centraliza login, ultimo perfil buscado e listas de repositorios/starred.
-- **Dados do GitHub:** as consultas sao feitas no cliente com `axios` diretamente para a API publica do GitHub.
+## ✨ Overview
 
-## Instalacao
+- Built with Next.js 16 using the Pages Router.
+- Uses React 19, TypeScript, and Tailwind CSS v4.
+- Fetches GitHub data client-side with `axios`.
+- Stores shared app state in `RepoConsultingContext`.
+- Includes Jest and Testing Library coverage for the UI.
 
-Use Yarn v1, pois o projeto possui `yarn.lock` nesse formato.
+## 🔄 Main Flow
+
+1. The user opens the app and sees the GitHub login screen.
+2. After GitHub redirects back with a `code` query parameter, the app marks the user as logged in on the client.
+3. The authenticated screen allows searching GitHub users by login.
+4. Selecting a user opens a detail screen with profile metrics and repository data.
+
+## 🧰 Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript 6
+- Tailwind CSS 4
+- Axios
+- Jest
+- Testing Library
+- ESLint
+
+## 📦 Installation
+
+This project uses Yarn v1.
 
 ```bash
 yarn install
 ```
 
-## Scripts
+## ▶️ Running Locally
 
 ```bash
 yarn dev
 ```
 
-Inicia o servidor de desenvolvimento em `http://localhost:3000`.
+Open `http://localhost:3000` in your browser.
 
-```bash
-yarn build
-```
+## 🧪 Scripts
 
-Gera a build de producao e executa o pipeline de TypeScript/build do Next.js.
+| Command | Description |
+| --- | --- |
+| `yarn dev` | Start the development server at `http://localhost:3000`. |
+| `yarn build` | Create a production build. |
+| `yarn start` | Start the production server. |
+| `yarn lint` | Run ESLint. |
+| `yarn lint:fix` | Run ESLint with automatic fixes. |
+| `yarn typecheck` | Run TypeScript checks without emitting files. |
+| `yarn test` | Run the Jest test suite. |
+| `yarn test:watch` | Run Jest in watch mode. |
+| `yarn test:coverage` | Generate test coverage. |
+| `yarn validate` | Run type checking, linting, tests, and a production build. |
 
-```bash
-yarn start
-```
+## 📁 Project Structure
 
-Serve a build gerada pelo `yarn build`.
+- `src/pages/_app.tsx`: loads global Tailwind styles and wraps the app with `RepoConsultingProvider`.
+- `src/pages/index.tsx`: switches between the login screen and the authenticated experience.
+- `src/contexts/RepoConsultingContext.tsx`: centralizes login state, selected user data, and repository-related UI state.
+- `src/components/LoginWithGitHub.tsx`: renders the OAuth entry screen and detects the GitHub `code` query parameter.
+- `src/components/AuthenticatedSearchScreen/index.tsx`: manages the search and detail views after login.
+- `src/components/SearchBar.tsx`: queries GitHub users and selects the active profile.
+- `src/components/UserDetailScreen/index.tsx`: loads repositories for the selected user and displays summary metrics.
+- `src/styles/tailwind.css`: Tailwind CSS v4 entry point and project design tokens.
+- `public/`: static assets used by the interface.
 
-## Estrutura
+## ⚠️ Important Notes
 
-- `src/pages/_app.tsx`: envolve a aplicacao com `RepoConsultingProvider`.
-- `src/pages/index.tsx`: tela inicial, exibindo login ou busca conforme o estado de autenticacao.
-- `src/contexts/RepoConsultingContext.tsx`: estado global de autenticacao, busca e listas.
-- `src/components/SearchBar.tsx`: busca perfis na API do GitHub.
-- `src/components/SearchResult.tsx`: exibe o perfil e busca repositorios ou starred.
-- `src/styles/tailwind.css`: entrada do Tailwind CSS v4 com tokens de design em `@theme`, estilos base em `@layer base` e utilitarios app-owned minimos.
-- `public`: imagens e icones usados pela interface.
+- The GitHub OAuth URL is hard-coded in `src/components/LoginWithGitHub.tsx` with `redirect_uri=http://localhost:3000/`.
+- The app does not exchange the OAuth `code` on the server. A redirect containing `?code=` is treated as a valid client-side login signal.
+- GitHub data is fetched directly from the browser using the public GitHub API.
+- Some UI copy in the application is still mixed between Portuguese and English.
+- Older components related to repository/starred flows still exist in the codebase, but the main screen flow currently centers on `AuthenticatedSearchScreen`, `SearchBar`, and `UserDetailScreen`.
 
-## Uso
+## ✅ Validation
 
-1. Execute `yarn dev`.
-2. Abra `http://localhost:3000`.
-3. Faca login pelo botao do GitHub.
-4. Pesquise um usuario do GitHub pelo nome de perfil.
-5. Use os botoes de resultado para carregar repositorios ou starred.
-
-## Observacoes
-
-- O OAuth do GitHub esta configurado diretamente em `src/components/LoginWithGitHub.tsx` com `redirect_uri=http://localhost:3000/`.
-- O app nao troca o `code` OAuth por token no servidor; ele considera uma query string na URL como login valido e salva `token@myToken` no `localStorage`.
-- Tailwind CSS v4 e o unico sistema de estilos app-owned; mantenha `@import "tailwindcss";` para preservar os defaults e adicione novos tokens semanticamente em `@theme`.
-
-## Contribuindo
-
-Antes de abrir uma alteracao, rode pelo menos:
+Before sharing changes, run:
 
 ```bash
 yarn validate
 ```
-
-Use classes Tailwind estaticas e preserve o idioma das telas existentes, que hoje mistura portugues e ingles.
