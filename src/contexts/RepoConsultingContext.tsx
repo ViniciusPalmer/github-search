@@ -43,6 +43,7 @@ export interface ILastSearchUser {
   mail: string | null;
   followers: number;
   company: string | null;
+  public_repos?: number;
 }
 
 interface ISearchRepo {

@@ -1,4 +1,4 @@
-import { UserResultCard, type UserResultCardItem } from "../UserResultCard";
+import { UserResultCard, type UserResultCardItem } from "../UserResultCard/index";
 
 interface UserSearchResultsProps {
   results: UserResultCardItem[];

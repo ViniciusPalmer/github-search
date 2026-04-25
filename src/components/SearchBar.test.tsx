@@ -1,4 +1,4 @@
-import { ContextType } from "react";
+import { ComponentProps, ContextType } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -49,12 +49,15 @@ const baseContext: RepoConsultingContextValue = {
   insertNewStarredStorage: jest.fn(),
 };
 
-function renderSearchBar(contextOverrides: Partial<RepoConsultingContextValue> = {}) {
+function renderSearchBar(
+  contextOverrides: Partial<RepoConsultingContextValue> = {},
+  props: Partial<ComponentProps<typeof SearchBar>> = {}
+) {
   const context = { ...baseContext, ...contextOverrides };
 
   return render(
     <RepoConsultingContext.Provider value={context}>
-      <SearchBar />
+      <SearchBar {...props} />
     </RepoConsultingContext.Provider>
   );
 }
@@ -102,6 +105,21 @@ describe("SearchBar", () => {
       target: { value: "   " },
     });
     fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+
+    // Assert
+    expect(mockedAxios.get).not.toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: "Buscar" })).toBeEnabled();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
+  it("does not search while the user is only typing", () => {
+    // Arrange
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
 
     // Assert
     expect(mockedAxios.get).not.toHaveBeenCalled();
@@ -202,9 +220,10 @@ describe("SearchBar", () => {
     expect(screen.queryByRole("button", { name: "Abrir perfil octo-6" })).not.toBeInTheDocument();
   });
 
-  it("fetches selected profile details and stores mapped user data", async () => {
+  it("fetches selected profile details, stores mapped user data, and opens detail", async () => {
     // Arrange
     const insertNewSearch = jest.fn();
+    const onUserSelected = jest.fn();
     mockedAxios.get
       .mockResolvedValueOnce({
         data: {
@@ -225,14 +244,24 @@ describe("SearchBar", () => {
         },
       });
 
-    renderSearchBar({ insertNewSearch });
+    renderSearchBar({ insertNewSearch }, { onUserSelected });
 
     // Act
     fireEvent.change(getSearchInput(), {
       target: { value: "octocat" },
     });
     fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
-    fireEvent.click(await screen.findByRole("button", { name: "Abrir perfil octocat" }));
+    const openProfileButton = await screen.findByRole("button", {
+      name: "Abrir perfil octocat",
+    });
+
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.get.mock.calls[0][0]).toBe(
+      "https://api.github.com/search/users"
+    );
+    expect(mockedAxios.get.mock.calls[0][0]).not.toContain("/users/octocat");
+
+    fireEvent.click(openProfileButton);
 
     // Assert
     await waitFor(() => {
@@ -248,7 +277,9 @@ describe("SearchBar", () => {
         followers: 42,
         company: null,
       });
+      expect(onUserSelected).toHaveBeenCalledTimes(1);
     });
+    expect(mockedAxios.get).toHaveBeenCalledTimes(2);
   });
 
   it("closes open repository and starred panels when starting a new search", async () => {

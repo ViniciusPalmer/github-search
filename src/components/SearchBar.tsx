@@ -1,16 +1,13 @@
-import { useState, useContext, type FormEvent, useCallback } from "react";
+import { useState, useContext, type FormEvent } from "react";
 import axios, { type AxiosResponse } from "axios";
 
 import {
   RepoConsultingContext,
   type ILastSearchUser,
 } from "../contexts/RepoConsultingContext";
-import { SearchResult } from "./SearchResult";
-import { RepoCards } from "./RepoCards";
-import { StarredCards } from "./StarredCards";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UserSearchResults } from "./UserSearchResults";
+import { UserSearchResults } from "./UserSearchResults/index";
 
 interface GitHubUserSearchResponse {
   total_count: number;
@@ -38,6 +35,7 @@ interface GitHubUserResponse {
   email: string | null;
   followers: number;
   company: string | null;
+  public_repos?: number;
 }
 
 const GITHUB_API_HEADERS = {
@@ -50,12 +48,16 @@ const MAX_USER_RESULTS = 5;
 const SEARCH_FILTER_CHIPS = [
   "match: login",
   "type: user",
-  "sort: closest",
+  "best match",
   "top 5",
 ];
 
+interface SearchBarProps {
+  onUserSelected?: () => void;
+}
+
 function mapGitHubUserResponse(res: AxiosResponse<GitHubUserResponse>): ILastSearchUser {
-  return {
+  const user: ILastSearchUser = {
     login: res.data.login,
     name: res.data.name ?? res.data.login,
     avatar_url: res.data.avatar_url,
@@ -64,25 +66,28 @@ function mapGitHubUserResponse(res: AxiosResponse<GitHubUserResponse>): ILastSea
     followers: res.data.followers,
     company: res.data.company,
   };
+
+  if (typeof res.data.public_repos === "number") {
+    return {
+      ...user,
+      public_repos: res.data.public_repos,
+    };
+  }
+
+  return user;
 }
 
-export function SearchBar() {
+export function SearchBar({ onUserSelected }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [searchedQuery, setSearchedQuery] = useState("");
   const [userResults, setUserResults] = useState<GitHubUserSearchItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedLogin, setSelectedLogin] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
-  const {
-    lastSearch,
-    insertNewSearch,
-    repoIsOpen,
-    starredIsOpen,
-    activeStarred,
-    activeRepo,
-  } = useContext(RepoConsultingContext);
+  const { insertNewSearch, repoIsOpen, starredIsOpen, activeStarred, activeRepo } =
+    useContext(RepoConsultingContext);
 
-  const closeOpenPanels = useCallback(() => {
+  function closeOpenPanels() {
     if (repoIsOpen) {
       activeRepo();
     }
@@ -90,9 +95,9 @@ export function SearchBar() {
     if (starredIsOpen) {
       activeStarred();
     }
-  }, [activeRepo, activeStarred, repoIsOpen, starredIsOpen]);
+  }
 
-  const searchOnGitHub = useCallback(async (): Promise<void> => {
+  async function searchOnGitHub(): Promise<void> {
     const normalizedQuery = query.trim();
 
     if (normalizedQuery === "") {
@@ -130,36 +135,31 @@ export function SearchBar() {
     } finally {
       setIsSearching(false);
     }
-  }, [closeOpenPanels, query]);
+  }
 
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>): void => {
-      event.preventDefault();
-      void searchOnGitHub();
-    },
-    [searchOnGitHub]
-  );
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+    void searchOnGitHub();
+  }
 
-  const handleSelectUser = useCallback(
-    async (login: string): Promise<void> => {
-      setSelectedLogin(login);
-      setStatusMessage("");
+  async function handleSelectUser(login: string): Promise<void> {
+    setSelectedLogin(login);
+    setStatusMessage("");
 
-      try {
-        const res = await axios.get<GitHubUserResponse>(
-          `https://api.github.com/users/${login}`
-        );
+    try {
+      const res = await axios.get<GitHubUserResponse>(
+        `https://api.github.com/users/${login}`
+      );
 
-        insertNewSearch(mapGitHubUserResponse(res));
-      } catch {
-        setStatusMessage("Nao foi possivel abrir este perfil.");
-        toast.error("Nao foi possivel abrir este perfil.");
-      } finally {
-        setSelectedLogin(null);
-      }
-    },
-    [insertNewSearch]
-  );
+      insertNewSearch(mapGitHubUserResponse(res));
+      onUserSelected?.();
+    } catch {
+      setStatusMessage("Nao foi possivel abrir este perfil.");
+      toast.error("Nao foi possivel abrir este perfil.");
+    } finally {
+      setSelectedLogin(null);
+    }
+  }
 
   return (
     <>
@@ -221,11 +221,6 @@ export function SearchBar() {
           onSelect={handleSelectUser}
         />
 
-        <div className="flex flex-col items-center">
-          {lastSearch && <SearchResult />}
-          <RepoCards />
-          <StarredCards />
-        </div>
       </section>
     </>
   );
