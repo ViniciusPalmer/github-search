@@ -14,22 +14,6 @@ jest.mock("react-toastify", () => ({
   },
 }));
 
-jest.mock("./SearchResult", () => ({
-  SearchResult: () => <div>Search result</div>,
-}));
-
-jest.mock("./RepoCards", () => ({
-  RepoCards: () => <div>Repo cards</div>,
-}));
-
-jest.mock("./StarredCards", () => ({
-  StarredCards: () => <div>Starred cards</div>,
-}));
-
-jest.mock("./LoadingScreen", () => ({
-  LoadingScreen: () => <div>Loading</div>,
-}));
-
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 type RepoConsultingContextValue = ContextType<typeof RepoConsultingContext>;
