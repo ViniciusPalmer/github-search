@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useContext } from "react";
 import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
 import { LoginWithGithub } from "../components/LoginWithGitHub";
@@ -7,8 +8,22 @@ export default function Home() {
   const { isLogged } = useContext(RepoConsultingContext);
 
   if (!isLogged) {
-    return <LoginWithGithub />;
+    return (
+      <>
+        <Head>
+          <title>github-search</title>
+        </Head>
+        <LoginWithGithub />
+      </>
+    );
   }
 
-  return <AuthenticatedSearchScreen />;
+  return (
+    <>
+      <Head>
+        <title>github-search</title>
+      </Head>
+      <AuthenticatedSearchScreen />
+    </>
+  );
 }

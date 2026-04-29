@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, type ReactNode, useState } from "react";
 
 interface RepoConsultingContext {
   isLogged: boolean;
@@ -17,7 +17,7 @@ interface RepoConsultingContext {
   insertNewStarredStorage: (data: ISearchStarred[]) => void;
 }
 
-interface RepoConsultingProviderprops {
+interface RepoConsultingProviderProps {
   children: ReactNode;
 }
 
@@ -64,12 +64,30 @@ interface IOwnerStarred {
 
 export const RepoConsultingContext = createContext({} as RepoConsultingContext);
 
+function setTokenStorage(token: string) {
+  const rightNow = new Date();
+  const nextDate = new Date(rightNow);
+  nextDate.setMinutes(rightNow.getMinutes() + 10);
+
+  const tokenSettings: IStorage = {
+    time: {
+      day: nextDate.getDate(),
+      month: nextDate.getMonth() + 1,
+      year: nextDate.getFullYear(),
+      hour: nextDate.getHours(),
+      minute: nextDate.getMinutes(),
+      second: nextDate.getSeconds(),
+    },
+    token,
+  };
+
+  localStorage.setItem("token@myToken", JSON.stringify(tokenSettings));
+}
+
 export function RepoConsultingProvider({
   children,
-}: RepoConsultingProviderprops) {
+}: RepoConsultingProviderProps) {
   const [isLogged, setIsLogged] = useState(false);
-  const [codeUrl, setCodeUrl] = useState("");
-  const [tokenTime, setTokenTime] = useState<ITokenTime>();
   const [lastSearch, setLastSearch] = useState<ILastSearchUser>();
   const [repoIsOpen, setRepoisOpen] = useState(false);
   const [starredIsOpen, setStarredIsOpen] = useState(false);
@@ -79,49 +97,18 @@ export function RepoConsultingProvider({
   //starred settings
   const [starredStorage, setStarredStorage] = useState<ISearchStarred[]>([]);
 
-  useEffect(() => {
-    const [, myUrl] = window.location.href.split("=");
-    const rigthNow = new Date();
+  function authentificationWithGibHub() {
+    const oauthCode = new URLSearchParams(window.location.search).get("code");
 
-    var nextDate = new Date(rigthNow);
-    nextDate.setMinutes(rigthNow.getMinutes() + 10);
+    if (oauthCode) {
+      setTokenStorage(oauthCode);
+    }
 
-    const newDate: ITokenTime = {
-      day: nextDate.getDate(),
-      month: nextDate.getMonth() + 1,
-      year: nextDate.getFullYear(),
-      hour: nextDate.getHours(),
-      minute: nextDate.getMinutes(),
-      second: nextDate.getSeconds(),
-    };
-
-    setCodeUrl(() => String(myUrl));
-    setTokenTime(newDate);
-
-    setTokenStorage();
-  }, [isLogged]);
-
-  function setTokenStorage() {
-    const mySettings: IStorage = {
-      time: tokenTime,
-      token: codeUrl,
-    };
-
-    localStorage.setItem("token@myToken", JSON.stringify(mySettings));
-  }
-
-  function getTokenStorage() {
-    const mySettings = localStorage.getItem("token@myToken");
-
-    // setCodeUrl(() => JSON.parse(mySettings.token))
-  }
-
-  async function authentificationWithGibHub() {
     setIsLogged(true);
   }
 
-  async function insertNewSearch(data: ILastSearchUser) {
-    await setLastSearch(() => data);
+  function insertNewSearch(data: ILastSearchUser) {
+    setLastSearch(() => data);
   }
 
   function activeRepo() {
@@ -134,12 +121,12 @@ export function RepoConsultingProvider({
     setStarredIsOpen(!starredIsOpen);
   }
 
-  async function insertNewRepoStorage(data: ISearchRepo[]) {
-    await setRepoStorage(() => data);
+  function insertNewRepoStorage(data: ISearchRepo[]) {
+    setRepoStorage(() => data);
   }
 
-  async function insertNewStarredStorage(data: ISearchStarred[]) {
-    await setStarredStorage(() => data);
+  function insertNewStarredStorage(data: ISearchStarred[]) {
+    setStarredStorage(() => data);
   }
 
   return (
