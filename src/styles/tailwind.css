@@ -127,4 +127,37 @@
   .scrollbar-brand::-webkit-scrollbar-thumb:hover {
     background: var(--color-scrollbar-thumb-hover);
   }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-auth {
+    scrollbar-color: var(--color-auth-border-strong) var(--color-auth-terminal);
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-auth::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-auth::-webkit-scrollbar-track {
+    background: var(--color-auth-terminal);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-auth::-webkit-scrollbar-thumb {
+    background: var(--color-auth-border-strong);
+    border: 2px solid var(--color-auth-terminal);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-auth::-webkit-scrollbar-thumb:hover {
+    background: var(--color-auth-cyan);
+  }
 }

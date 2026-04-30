@@ -1,38 +1,14 @@
-import { createContext, type ReactNode, useState } from "react";
-
-interface RepoConsultingContext {
-  isLogged: boolean;
-  lastSearch: ILastSearchUser | undefined;
-  repoIsOpen: boolean;
-  starredIsOpen: boolean;
-  insertNewSearch: (data: ILastSearchUser) => void;
-  authentificationWithGibHub: () => void;
-  activeRepo: () => void;
-  activeStarred: () => void;
-
-  repoStorage: ISearchRepo[];
-  starredStorage: ISearchStarred[];
-
-  insertNewRepoStorage: (data: ISearchRepo[]) => void;
-  insertNewStarredStorage: (data: ISearchStarred[]) => void;
-}
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 interface RepoConsultingProviderProps {
   children: ReactNode;
-}
-
-interface ITokenTime {
-  day: number;
-  month: number;
-  year: number;
-  hour: number;
-  minute: number;
-  second: number;
-}
-
-interface IStorage {
-  time: ITokenTime;
-  token: string;
 }
 
 export interface ILastSearchUser {
@@ -46,109 +22,63 @@ export interface ILastSearchUser {
   public_repos?: number;
 }
 
-interface ISearchRepo {
-  name: string;
-  description: string;
+export interface RepoConsultingContextValue {
+  isAuthenticated: boolean;
+  lastSearch: ILastSearchUser | undefined;
+  startSession: () => void;
+  logout: () => void;
+  insertNewSearch: (data: ILastSearchUser) => void;
 }
 
-interface ISearchStarred {
-  name: string;
-  description: string;
-  owner: IOwnerStarred;
-}
-
-interface IOwnerStarred {
-  login: string;
-  avatar_url: string;
-}
-
-export const RepoConsultingContext = createContext({} as RepoConsultingContext);
-
-function setTokenStorage(token: string) {
-  const rightNow = new Date();
-  const nextDate = new Date(rightNow);
-  nextDate.setMinutes(rightNow.getMinutes() + 10);
-
-  const tokenSettings: IStorage = {
-    time: {
-      day: nextDate.getDate(),
-      month: nextDate.getMonth() + 1,
-      year: nextDate.getFullYear(),
-      hour: nextDate.getHours(),
-      minute: nextDate.getMinutes(),
-      second: nextDate.getSeconds(),
-    },
-    token,
-  };
-
-  localStorage.setItem("token@myToken", JSON.stringify(tokenSettings));
-}
+export const RepoConsultingContext = createContext<
+  RepoConsultingContextValue | undefined
+>(undefined);
 
 export function RepoConsultingProvider({
   children,
 }: RepoConsultingProviderProps) {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [lastSearch, setLastSearch] = useState<ILastSearchUser>();
-  const [repoIsOpen, setRepoisOpen] = useState(false);
-  const [starredIsOpen, setStarredIsOpen] = useState(false);
 
-  //repositores settings
-  const [repoStorage, setRepoStorage] = useState<ISearchRepo[]>([]);
-  //starred settings
-  const [starredStorage, setStarredStorage] = useState<ISearchStarred[]>([]);
+  const startSession = useCallback(() => {
+    setIsAuthenticated(true);
+  }, []);
 
-  function authentificationWithGibHub() {
-    const oauthCode = new URLSearchParams(window.location.search).get("code");
+  const logout = useCallback(() => {
+    setIsAuthenticated(false);
+    setLastSearch(undefined);
+  }, []);
 
-    if (oauthCode) {
-      setTokenStorage(oauthCode);
-    }
+  const insertNewSearch = useCallback((data: ILastSearchUser) => {
+    setLastSearch(data);
+  }, []);
 
-    setIsLogged(true);
-  }
-
-  function insertNewSearch(data: ILastSearchUser) {
-    setLastSearch(() => data);
-  }
-
-  function activeRepo() {
-    setStarredIsOpen(false);
-    setRepoisOpen(!repoIsOpen);
-  }
-
-  function activeStarred() {
-    setRepoisOpen(false);
-    setStarredIsOpen(!starredIsOpen);
-  }
-
-  function insertNewRepoStorage(data: ISearchRepo[]) {
-    setRepoStorage(() => data);
-  }
-
-  function insertNewStarredStorage(data: ISearchStarred[]) {
-    setStarredStorage(() => data);
-  }
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      lastSearch,
+      startSession,
+      logout,
+      insertNewSearch,
+    }),
+    [insertNewSearch, isAuthenticated, lastSearch, logout, startSession]
+  );
 
   return (
-    <RepoConsultingContext.Provider
-      value={{
-        isLogged,
-        lastSearch,
-        repoIsOpen,
-        starredIsOpen,
-        insertNewSearch,
-        authentificationWithGibHub,
-        activeRepo,
-        activeStarred,
-
-        repoStorage,
-        starredStorage,
-
-        insertNewRepoStorage,
-        insertNewStarredStorage,
-      }}
-    >
+    <RepoConsultingContext.Provider value={value}>
       {children}
     </RepoConsultingContext.Provider>
   );
+}
+
+export function useRepoConsultingContext() {
+  const context = useContext(RepoConsultingContext);
+
+  if (!context) {
+    throw new Error(
+      "useRepoConsultingContext must be used within RepoConsultingProvider"
+    );
+  }
+
+  return context;
 }

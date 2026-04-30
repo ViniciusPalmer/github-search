@@ -1,8 +1,11 @@
-import { ComponentProps, ContextType } from "react";
+import { ComponentProps } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
+import {
+  RepoConsultingContext,
+  type RepoConsultingContextValue,
+} from "../contexts/RepoConsultingContext";
 import { SearchBar } from "./SearchBar";
 
 jest.mock("axios");
@@ -16,21 +19,12 @@ jest.mock("react-toastify", () => ({
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-type RepoConsultingContextValue = ContextType<typeof RepoConsultingContext>;
-
 const baseContext: RepoConsultingContextValue = {
-  isLogged: true,
+  isAuthenticated: true,
   lastSearch: undefined,
-  repoIsOpen: false,
-  starredIsOpen: false,
+  startSession: jest.fn(),
+  logout: jest.fn(),
   insertNewSearch: jest.fn(),
-  authentificationWithGibHub: jest.fn(),
-  activeRepo: jest.fn(),
-  activeStarred: jest.fn(),
-  repoStorage: [],
-  starredStorage: [],
-  insertNewRepoStorage: jest.fn(),
-  insertNewStarredStorage: jest.fn(),
 };
 
 function renderSearchBar(
@@ -51,7 +45,7 @@ function getSearchInput() {
 }
 
 function getSearchForm() {
-  const form = screen.getByRole("button", { name: "Buscar" }).closest("form");
+  const form = getSearchInput().closest("form");
 
   if (!form) {
     throw new Error("Search form was not rendered");
@@ -134,7 +128,7 @@ describe("SearchBar", () => {
         {
           params: {
             q: "octo in:login type:user",
-            per_page: 5,
+            per_page: 10,
             page: 1,
           },
           headers: {
@@ -172,7 +166,7 @@ describe("SearchBar", () => {
         expect.objectContaining({
           params: expect.objectContaining({
             q: "octocat in:login type:user",
-            per_page: 5,
+            per_page: 10,
             page: 1,
           }),
         })
@@ -180,13 +174,47 @@ describe("SearchBar", () => {
     });
   });
 
-  it("renders at most five result cards", async () => {
+  it("ignores repeated submit attempts while a search is already loading", async () => {
+    // Arrange
+    let resolveSearch: (value: unknown) => void = jest.fn();
+    const searchRequest = new Promise((resolve) => {
+      resolveSearch = resolve;
+    });
+
+    mockedAxios.get.mockReturnValue(searchRequest as ReturnType<typeof mockedAxios.get>);
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.submit(getSearchForm());
+
+    // Assert
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+
+    resolveSearch({
+      data: {
+        total_count: 1,
+        incomplete_results: false,
+        items: [makeSearchItem("octocat")],
+      },
+    });
+
+    expect(await screen.findByRole("button", { name: "Abrir perfil octocat" })).toBeInTheDocument();
+  });
+
+  it("renders at most ten result cards and shows paginated summary", async () => {
     // Arrange
     mockedAxios.get.mockResolvedValueOnce({
       data: {
-        total_count: 6,
+        total_count: 12,
         incomplete_results: false,
-        items: [1, 2, 3, 4, 5, 6].map((index) => makeSearchItem(`octo-${index}`, index)),
+        items: Array.from({ length: 12 }, (_, index) =>
+          makeSearchItem(`octo-${index + 1}`, index + 1)
+        ),
       },
     });
 
@@ -199,9 +227,276 @@ describe("SearchBar", () => {
     fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
 
     // Assert
-    expect(await screen.findAllByRole("button", { name: /Abrir perfil/ })).toHaveLength(5);
+    expect(await screen.findAllByRole("button", { name: /Abrir perfil/ })).toHaveLength(10);
     expect(screen.getByRole("button", { name: "Abrir perfil octo-1" })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Abrir perfil octo-6" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Abrir perfil octo-11" })).not.toBeInTheDocument();
+    expect(screen.getByText("1-10 de 12")).toBeInTheDocument();
+    expect(screen.queryByText(/de 5/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Página anterior" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Próxima página" })).toBeEnabled();
+  });
+
+  it("requests the next page with the same confirmed query and updates pagination state", async () => {
+    // Arrange
+    mockedAxios.get
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 1}`, index + 1)
+          ),
+        },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 11}`, index + 11)
+          ),
+        },
+      });
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Próxima página" }));
+
+    // Assert
+    await waitFor(() => {
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(
+        2,
+        "https://api.github.com/search/users",
+        expect.objectContaining({
+          params: expect.objectContaining({
+            q: "octo in:login type:user",
+            per_page: 10,
+            page: 2,
+          }),
+        })
+      );
+    });
+    expect(await screen.findByRole("button", { name: "Abrir perfil octo-11" })).toBeInTheDocument();
+    expect(screen.getByText("11-20 de 25")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Página anterior" })).toBeEnabled();
+  });
+
+  it("disables the next-page action on the last available page", async () => {
+    // Arrange
+    mockedAxios.get
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 15,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 1}`, index + 1)
+          ),
+        },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 15,
+          incomplete_results: false,
+          items: Array.from({ length: 5 }, (_, index) =>
+            makeSearchItem(`octo-${index + 11}`, index + 11)
+          ),
+        },
+      });
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Próxima página" }));
+
+    // Assert
+    expect(await screen.findByRole("button", { name: "Abrir perfil octo-15" })).toBeInTheDocument();
+    expect(screen.getByText("11-15 de 15")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Página anterior" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Próxima página" })).toBeDisabled();
+  });
+
+  it("resets the pagination to the first page when a new search starts", async () => {
+    // Arrange
+    mockedAxios.get
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 1}`, index + 1)
+          ),
+        },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 11}`, index + 11)
+          ),
+        },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 2,
+          incomplete_results: false,
+          items: [makeSearchItem("hubot"), makeSearchItem("hubot-dev", 2)],
+        },
+      });
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Próxima página" }));
+
+    await screen.findByRole("button", { name: "Abrir perfil octo-11" });
+
+    fireEvent.change(getSearchInput(), {
+      target: { value: "hubot" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+
+    // Assert
+    await waitFor(() => {
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(
+        3,
+        "https://api.github.com/search/users",
+        expect.objectContaining({
+          params: expect.objectContaining({
+            q: "hubot in:login type:user",
+            per_page: 10,
+            page: 1,
+          }),
+        })
+      );
+    });
+    expect(await screen.findByRole("button", { name: "Abrir perfil hubot" })).toBeInTheDocument();
+    expect(screen.getByText("1-2 de 2")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Próxima página" })).not.toBeInTheDocument();
+  });
+
+  it("caps the paginated total to the GitHub Search API limit", async () => {
+    // Arrange
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        total_count: 5000,
+        incomplete_results: false,
+        items: Array.from({ length: 10 }, (_, index) =>
+          makeSearchItem(`octo-${index + 1}`, index + 1)
+        ),
+      },
+    });
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+
+    // Assert
+    expect(await screen.findByText("1-10 de 1000")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Página 100" })).toBeInTheDocument();
+  });
+
+  it("keeps the previous results visible when a paginated request fails", async () => {
+    // Arrange
+    mockedAxios.get
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 1}`, index + 1)
+          ),
+        },
+      })
+      .mockRejectedValueOnce(new Error("page error"));
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Próxima página" }));
+
+    // Assert
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalledWith("Nao foi possivel buscar usuarios agora.");
+    });
+    expect(screen.getByRole("button", { name: "Abrir perfil octo-1" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Abrir perfil octo-11" })).not.toBeInTheDocument();
+    expect(screen.getByText("1-10 de 25")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Próxima página" })).toBeEnabled();
+  });
+
+  it("prevents duplicate pagination requests while the next page is loading", async () => {
+    // Arrange
+    let resolveNextPage: (value: unknown) => void = jest.fn();
+    const nextPageRequest = new Promise((resolve) => {
+      resolveNextPage = resolve;
+    });
+
+    mockedAxios.get
+      .mockResolvedValueOnce({
+        data: {
+          total_count: 25,
+          incomplete_results: false,
+          items: Array.from({ length: 10 }, (_, index) =>
+            makeSearchItem(`octo-${index + 1}`, index + 1)
+          ),
+        },
+      })
+      .mockReturnValueOnce(nextPageRequest as ReturnType<typeof mockedAxios.get>);
+
+    renderSearchBar();
+
+    // Act
+    fireEvent.change(getSearchInput(), {
+      target: { value: "octo" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+
+    const nextPageButton = await screen.findByRole("button", { name: "Próxima página" });
+
+    fireEvent.click(nextPageButton);
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Próxima página" })).toBeDisabled();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Próxima página" }));
+
+    // Assert
+    expect(mockedAxios.get).toHaveBeenCalledTimes(2);
+
+    resolveNextPage({
+      data: {
+        total_count: 25,
+        incomplete_results: false,
+        items: Array.from({ length: 10 }, (_, index) =>
+          makeSearchItem(`octo-${index + 11}`, index + 11)
+        ),
+      },
+    });
+
+    expect(await screen.findByRole("button", { name: "Abrir perfil octo-11" })).toBeInTheDocument();
   });
 
   it("fetches selected profile details, stores mapped user data, and opens detail", async () => {
@@ -264,33 +559,6 @@ describe("SearchBar", () => {
       expect(onUserSelected).toHaveBeenCalledTimes(1);
     });
     expect(mockedAxios.get).toHaveBeenCalledTimes(2);
-  });
-
-  it("closes open repository and starred panels when starting a new search", async () => {
-    // Arrange
-    const activeRepo = jest.fn();
-    const activeStarred = jest.fn();
-    mockedAxios.get.mockResolvedValueOnce({
-      data: {
-        total_count: 0,
-        incomplete_results: false,
-        items: [],
-      },
-    });
-
-    renderSearchBar({ repoIsOpen: true, starredIsOpen: true, activeRepo, activeStarred });
-
-    // Act
-    fireEvent.change(getSearchInput(), {
-      target: { value: "octocat" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
-
-    // Assert
-    await waitFor(() => {
-      expect(activeRepo).toHaveBeenCalledTimes(1);
-      expect(activeStarred).toHaveBeenCalledTimes(1);
-    });
   });
 
   it("shows an error message when Search Users rejects", async () => {

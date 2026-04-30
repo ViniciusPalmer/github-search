@@ -1,11 +1,13 @@
 interface SearchTopNavProps {
   showNewSearchAction?: boolean;
   onNewSearch?: () => void;
+  onLogout?: () => void;
 }
 
 export function SearchTopNav({
   showNewSearchAction = false,
   onNewSearch,
+  onLogout,
 }: SearchTopNavProps) {
   return (
     <nav className="flex w-full items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
@@ -34,9 +36,13 @@ export function SearchTopNav({
           Nova busca
         </button>
       ) : (
-        <span className="rounded-full border border-auth-border-strong bg-auth-terminal/80 px-4 py-2 font-auth-label text-xs font-semibold uppercase tracking-[0.24em] text-auth-cyan shadow-auth-panel">
-          LOGADO COM GITHUB
-        </span>
+        <button
+          type="button"
+          onClick={onLogout}
+          className="rounded-full border border-auth-border-strong bg-auth-terminal/80 px-4 py-2 font-auth-label text-xs font-semibold uppercase tracking-[0.24em] text-auth-cyan shadow-auth-panel transition hover:border-auth-cyan hover:text-auth-text-primary focus-visible:ring-2 focus-visible:ring-auth-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-auth-bg-mid focus-visible:outline-none"
+        >
+          Sair
+        </button>
       )}
     </nav>
   );

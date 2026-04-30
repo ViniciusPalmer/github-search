@@ -1,21 +1,28 @@
-import { ContextType, ImgHTMLAttributes } from "react";
+import { ImgHTMLAttributes } from "react";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import axios from "axios";
 
-import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
+import {
+  RepoConsultingContext,
+  type RepoConsultingContextValue,
+} from "../contexts/RepoConsultingContext";
 import { UserDetailScreen } from "./UserDetailScreen";
+
+type MockNextImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+  unoptimized?: boolean;
+};
 
 jest.mock("axios");
 
 jest.mock("next/image", () => ({
   __esModule: true,
-  // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-  default: (props: ImgHTMLAttributes<HTMLImageElement>) => <img {...props} />,
+  default: ({ unoptimized: _unoptimized, ...props }: MockNextImageProps) => (
+    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    <img {...props} />
+  ),
 }));
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-type RepoConsultingContextValue = ContextType<typeof RepoConsultingContext>;
 
 const selectedUser = {
   login: "octocat",
@@ -28,18 +35,11 @@ const selectedUser = {
 };
 
 const baseContext: RepoConsultingContextValue = {
-  isLogged: true,
+  isAuthenticated: true,
   lastSearch: selectedUser,
-  repoIsOpen: false,
-  starredIsOpen: false,
+  startSession: jest.fn(),
+  logout: jest.fn(),
   insertNewSearch: jest.fn(),
-  authentificationWithGibHub: jest.fn(),
-  activeRepo: jest.fn(),
-  activeStarred: jest.fn(),
-  repoStorage: [],
-  starredStorage: [],
-  insertNewRepoStorage: jest.fn(),
-  insertNewStarredStorage: jest.fn(),
 };
 
 function renderDetail(contextOverrides: Partial<RepoConsultingContextValue> = {}) {

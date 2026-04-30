@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { RepoConsultingContext } from "../../contexts/RepoConsultingContext";
+import { useRepoConsultingContext } from "../../contexts/RepoConsultingContext";
 import { SelectedRepositorySummary } from "../SelectedRepositorySummary/index";
 import { UserRepositoryList } from "../UserRepositoryList/index";
 import type { UserRepositoryItem } from "../UserRepositoryCard/index";
@@ -56,7 +56,7 @@ function formatCompactNumber(value: number): string {
 }
 
 export function UserDetailScreen({ onBack }: UserDetailScreenProps) {
-  const { lastSearch } = useContext(RepoConsultingContext);
+  const { lastSearch } = useRepoConsultingContext();
   const selectedLogin = lastSearch?.login;
   const [repositories, setRepositories] = useState<UserRepositoryItem[]>([]);
   const [selectedRepository, setSelectedRepository] =

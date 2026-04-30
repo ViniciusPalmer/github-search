@@ -28,7 +28,7 @@ export function UserResultCard({
       aria-label={`Abrir perfil ${user.login}`}
       disabled={isDisabled}
       onClick={() => onSelect(user.login)}
-      className="group flex min-h-20 w-full items-center gap-4 rounded-auth-card border border-auth-border bg-auth-terminal/80 p-4 text-left transition duration-200 hover:border-auth-cyan/70 hover:bg-auth-terminal-tile/90 focus-visible:ring-2 focus-visible:ring-auth-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-auth-panel focus-visible:outline-none disabled:cursor-wait disabled:opacity-70"
+      className="group flex min-h-[72px] w-full items-center gap-3 rounded-auth-card border border-auth-border bg-auth-terminal/80 p-3 text-left transition duration-200 hover:border-auth-cyan/70 hover:bg-auth-terminal-tile/90 focus-visible:ring-2 focus-visible:ring-auth-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-auth-panel focus-visible:outline-none disabled:cursor-wait disabled:opacity-70"
     >
       <Image
         src={user.avatar_url}
@@ -48,7 +48,7 @@ export function UserResultCard({
           <span>score {user.score.toFixed(2)}</span>
         </span>
       </span>
-      <span className="rounded-full border border-auth-border-strong px-3 py-1 font-auth-label text-xs font-semibold uppercase tracking-[0.18em] text-auth-cyan transition group-hover:border-auth-cyan">
+      <span className="rounded-full border border-auth-border-strong px-3 py-1 font-auth-label text-[11px] font-semibold uppercase tracking-[0.18em] text-auth-cyan transition group-hover:border-auth-cyan">
         {isLoading ? "Abrindo..." : "Abrir"}
       </span>
     </button>
