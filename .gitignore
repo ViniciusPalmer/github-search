@@ -42,5 +42,6 @@ yarn-error.log*
 .vercel
 
 # docs and plans
-#.docs
+.docs
+.specs
 

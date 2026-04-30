@@ -27,7 +27,8 @@ export function UserRepositoryCard({
   isSelected,
   onSelect,
 }: UserRepositoryCardProps) {
-  const language = repository.language ?? "Stack não informada";
+  const language = repository.language ?? "N/A";
+  const repositoryStats = `${language} • ${repository.stargazers_count} Stars`;
 
   return (
     <button
@@ -49,8 +50,13 @@ export function UserRepositoryCard({
           {repository.description ?? "Sem descrição disponível."}
         </span>
       </span>
-      <span className="justify-self-end rounded-full border border-auth-border-strong bg-auth-panel px-3 py-1 font-auth-label text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-auth-cyan max-sm:justify-self-start">
-        {language} • {repository.stargazers_count} stars
+      <span className="min-w-0 max-w-full justify-self-end max-sm:justify-self-start">
+        <span
+          title={repositoryStats}
+          className="block overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-auth-border-strong bg-auth-panel px-3 py-1 font-auth-label text-[0.68rem] font-semibold tracking-[0.14em] text-auth-cyan"
+        >
+          {repositoryStats}
+        </span>
       </span>
     </button>
   );

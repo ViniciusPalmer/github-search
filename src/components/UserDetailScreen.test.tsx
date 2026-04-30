@@ -154,6 +154,44 @@ describe("UserDetailScreen", () => {
         name: "Abrir repositório hello-world no GitHub",
       })
     ).toHaveAttribute("href", "https://github.com/octocat/hello-world");
+
+    const topStackMetric = screen.getByTitle("TypeScript");
+    expect(topStackMetric).toHaveClass("truncate");
+  });
+
+  it("renders N/A in the top stack metric when no repository has language information", async () => {
+    // Arrange
+    mockedAxios.get.mockResolvedValueOnce({
+      data: [
+        makeRepository(1, "hello-world", { language: null }),
+        makeRepository(2, "api-kit", { language: null }),
+      ],
+    });
+
+    // Act
+    renderDetail();
+
+    // Assert
+    expect(await screen.findByLabelText("Métrica TOP STACK: N/A")).toBeInTheDocument();
+    expect(screen.getByTitle("N/A")).toHaveClass("truncate");
+  });
+
+  it("keeps the full top stack value available in the title when the metric text is long", async () => {
+    // Arrange
+    const longStack = "A-very-long-stack-name-that-should-overflow-the-metric-card";
+
+    mockedAxios.get.mockResolvedValueOnce({
+      data: [makeRepository(1, "hello-world", { language: longStack })],
+    });
+
+    // Act
+    renderDetail();
+
+    // Assert
+    expect(
+      await screen.findByLabelText(`Métrica TOP STACK: ${longStack}`)
+    ).toBeInTheDocument();
+    expect(screen.getByTitle(longStack)).toHaveClass("truncate");
   });
 
   it("renders an empty state when the selected user has no displayed repositories", async () => {

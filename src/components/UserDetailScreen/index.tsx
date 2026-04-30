@@ -206,9 +206,12 @@ export function UserDetailScreen({ onBack }: UserDetailScreenProps) {
           <article
             key={metric.label}
             aria-label={`Métrica ${metric.label}: ${metric.value}`}
-            className="flex min-h-[100px] flex-col justify-between rounded-auth-card border border-auth-border bg-auth-panel p-[18px]"
+            className="flex min-h-[100px] min-w-0 flex-col justify-between rounded-auth-card border border-auth-border bg-auth-panel p-[18px]"
           >
-            <p className="font-auth-title text-3xl font-bold text-auth-text-primary">
+            <p
+              title={metric.value}
+              className="truncate font-auth-title text-3xl font-bold text-auth-text-primary"
+            >
               {metric.value}
             </p>
             <div>

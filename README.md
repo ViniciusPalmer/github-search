@@ -1,3 +1,5 @@
+![GitHub Search](./github-search.png)
+
 # GitHub Search ![react](https://www.readmecodegen.com/api/social-icon?name=react&size=24) ![typescript](https://www.readmecodegen.com/api/social-icon?name=typescript&size=24) ![tailwindcss](https://www.readmecodegen.com/api/social-icon?name=tailwindcss&size=24)
 
 GitHub Search is a Next.js web app for discovering GitHub profiles. The current flow starts with a GitHub login screen, lets the user search accounts by login, and opens a detail view with profile information and recent repositories.
