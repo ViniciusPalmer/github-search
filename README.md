@@ -1,4 +1,4 @@
-![GitHub Search](./github-search.png)
+![GitHub Search](./src/assets/images/github-search.png)
 
 # GitHub Search ![react](https://www.readmecodegen.com/api/social-icon?name=react&size=24) ![typescript](https://www.readmecodegen.com/api/social-icon?name=typescript&size=24) ![tailwindcss](https://www.readmecodegen.com/api/social-icon?name=tailwindcss&size=24)
 
