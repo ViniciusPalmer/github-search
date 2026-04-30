@@ -8,7 +8,7 @@ export function SearchHero() {
         Encontre usuários próximos no GitHub
       </h1>
       <p className="max-w-2xl text-base leading-7 text-auth-text-secondary sm:text-lg">
-        Digite parte de um nome de usuário e veja até cinco perfis mais próximos para continuar sua busca.
+        Digite parte de um nome de usuário e veja até dez perfis mais próximos para continuar sua busca.
       </p>
     </section>
   );

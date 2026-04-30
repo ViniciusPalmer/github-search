@@ -1,7 +1,9 @@
-import { ContextType } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
+import {
+  RepoConsultingContext,
+  type RepoConsultingContextValue,
+} from "../contexts/RepoConsultingContext";
 import { AuthenticatedSearchScreen } from "./AuthenticatedSearchScreen";
 
 jest.mock("./SearchBar", () => ({
@@ -20,10 +22,8 @@ jest.mock("./UserDetailScreen/index", () => ({
   UserDetailScreen: () => <div>Detail screen</div>,
 }));
 
-type RepoConsultingContextValue = ContextType<typeof RepoConsultingContext>;
-
 const baseContext: RepoConsultingContextValue = {
-  isLogged: true,
+  isAuthenticated: true,
   lastSearch: {
     login: "octocat",
     name: "The Octocat",
@@ -33,21 +33,18 @@ const baseContext: RepoConsultingContextValue = {
     followers: 42,
     company: null,
   },
-  repoIsOpen: false,
-  starredIsOpen: false,
+  startSession: jest.fn(),
+  logout: jest.fn(),
   insertNewSearch: jest.fn(),
-  authentificationWithGibHub: jest.fn(),
-  activeRepo: jest.fn(),
-  activeStarred: jest.fn(),
-  repoStorage: [],
-  starredStorage: [],
-  insertNewRepoStorage: jest.fn(),
-  insertNewStarredStorage: jest.fn(),
 };
 
-function renderAuthenticatedSearchScreen() {
+function renderAuthenticatedSearchScreen(
+  contextOverrides: Partial<RepoConsultingContextValue> = {}
+) {
+  const context = { ...baseContext, ...contextOverrides };
+
   return render(
-    <RepoConsultingContext.Provider value={baseContext}>
+    <RepoConsultingContext.Provider value={context}>
       <AuthenticatedSearchScreen />
     </RepoConsultingContext.Provider>
   );
@@ -75,6 +72,33 @@ describe("AuthenticatedSearchScreen", () => {
     // Assert
     expect(screen.getByText("Search hero")).toBeInTheDocument();
     expect(screen.queryByText("Detail screen")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Nova busca" })).not.toBeInTheDocument();
+  });
+
+  it("keeps the search view when detail mode is requested without a selected profile", () => {
+    // Arrange
+    renderAuthenticatedSearchScreen({ lastSearch: undefined });
+
+    // Act
+    fireEvent.click(screen.getByRole("button", { name: "Abrir detalhe mock" }));
+
+    // Assert
+    expect(screen.getByText("Search hero")).toBeInTheDocument();
+    expect(screen.queryByText("Detail screen")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Nova busca" })).not.toBeInTheDocument();
+  });
+
+  it("shows a logout action in search mode and calls the context logout handler", () => {
+    // Arrange
+    const logout = jest.fn();
+
+    renderAuthenticatedSearchScreen({ logout });
+
+    // Act
+    fireEvent.click(screen.getByRole("button", { name: "Sair" }));
+
+    // Assert
+    expect(logout).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole("button", { name: "Nova busca" })).not.toBeInTheDocument();
   });
 });

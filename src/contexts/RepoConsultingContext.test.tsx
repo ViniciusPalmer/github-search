@@ -1,27 +1,47 @@
-import { ReactNode, useContext } from "react";
-import { render, screen } from "@testing-library/react";
+import { ReactNode } from "react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import {
-  RepoConsultingContext,
+  type ILastSearchUser,
   RepoConsultingProvider,
+  useRepoConsultingContext,
 } from "./RepoConsultingContext";
 
 function TestConsumer() {
-  const context = useContext(RepoConsultingContext);
+  const { isAuthenticated, lastSearch, startSession, logout, insertNewSearch } =
+    useRepoConsultingContext();
+
+  const mockedSearchUser: ILastSearchUser = {
+    login: "octocat",
+    name: "The Octocat",
+    avatar_url: "https://example.test/avatar.png",
+    type: "User",
+    mail: null,
+    followers: 42,
+    company: null,
+    public_repos: 8,
+  };
 
   return (
-    <dl>
-      <dt>isLogged</dt>
-      <dd>{String(context.isLogged)}</dd>
-      <dt>repoIsOpen</dt>
-      <dd>{String(context.repoIsOpen)}</dd>
-      <dt>starredIsOpen</dt>
-      <dd>{String(context.starredIsOpen)}</dd>
-      <dt>repoStorage</dt>
-      <dd>{context.repoStorage.length}</dd>
-      <dt>starredStorage</dt>
-      <dd>{context.starredStorage.length}</dd>
-    </dl>
+    <>
+      <p>authenticated: {isAuthenticated ? "yes" : "no"}</p>
+      <p>selected login: {lastSearch?.login ?? "none"}</p>
+      <button type="button" onClick={startSession}>
+        start session
+      </button>
+      <button type="button" onClick={() => insertNewSearch(mockedSearchUser)}>
+        store last search
+      </button>
+      <button type="button" onClick={logout}>
+        logout
+      </button>
+    </>
   );
+}
+
+function GuardConsumer() {
+  useRepoConsultingContext();
+
+  return <span>guard consumer</span>;
 }
 
 function renderProvider(children: ReactNode) {
@@ -29,6 +49,16 @@ function renderProvider(children: ReactNode) {
 }
 
 describe("RepoConsultingProvider", () => {
+  let consoleErrorSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleErrorSpy.mockRestore();
+  });
+
   it("renders children", () => {
     // Arrange
     renderProvider(<span>provider child</span>);
@@ -40,22 +70,37 @@ describe("RepoConsultingProvider", () => {
     expect(actualChild).toBeInTheDocument();
   });
 
-  it("provides the default context values", () => {
+  it("starts logged out, stores the latest selected profile, and clears state on logout", () => {
     // Arrange
     renderProvider(<TestConsumer />);
 
+    // Assert
+    expect(screen.getByText("authenticated: no")).toBeInTheDocument();
+    expect(screen.getByText("selected login: none")).toBeInTheDocument();
+
     // Act
-    const actualIsLogged = screen.getByText("isLogged").nextSibling;
-    const actualRepoIsOpen = screen.getByText("repoIsOpen").nextSibling;
-    const actualStarredIsOpen = screen.getByText("starredIsOpen").nextSibling;
-    const actualRepoStorage = screen.getByText("repoStorage").nextSibling;
-    const actualStarredStorage = screen.getByText("starredStorage").nextSibling;
+    fireEvent.click(screen.getByRole("button", { name: "start session" }));
 
     // Assert
-    expect(actualIsLogged).toHaveTextContent("false");
-    expect(actualRepoIsOpen).toHaveTextContent("false");
-    expect(actualStarredIsOpen).toHaveTextContent("false");
-    expect(actualRepoStorage).toHaveTextContent("0");
-    expect(actualStarredStorage).toHaveTextContent("0");
+    expect(screen.getByText("authenticated: yes")).toBeInTheDocument();
+
+    // Act
+    fireEvent.click(screen.getByRole("button", { name: "store last search" }));
+
+    // Assert
+    expect(screen.getByText("selected login: octocat")).toBeInTheDocument();
+
+    // Act
+    fireEvent.click(screen.getByRole("button", { name: "logout" }));
+
+    // Assert
+    expect(screen.getByText("authenticated: no")).toBeInTheDocument();
+    expect(screen.getByText("selected login: none")).toBeInTheDocument();
+  });
+
+  it("throws when the hook is used outside the provider", () => {
+    expect(() => render(<GuardConsumer />)).toThrow(
+      "useRepoConsultingContext must be used within RepoConsultingProvider"
+    );
   });
 });

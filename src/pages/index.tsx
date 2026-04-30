@@ -1,29 +1,17 @@
 import Head from "next/head";
-import { useContext } from "react";
-import { RepoConsultingContext } from "../contexts/RepoConsultingContext";
-import { LoginWithGithub } from "../components/LoginWithGitHub";
 import { AuthenticatedSearchScreen } from "../components/AuthenticatedSearchScreen";
+import { LoggedOutLandingScreen } from "../components/LoggedOutLandingScreen";
+import { useRepoConsultingContext } from "../contexts/RepoConsultingContext";
 
 export default function Home() {
-  const { isLogged } = useContext(RepoConsultingContext);
-
-  if (!isLogged) {
-    return (
-      <>
-        <Head>
-          <title>github-search</title>
-        </Head>
-        <LoginWithGithub />
-      </>
-    );
-  }
+  const { isAuthenticated } = useRepoConsultingContext();
 
   return (
     <>
       <Head>
         <title>github-search</title>
       </Head>
-      <AuthenticatedSearchScreen />
+      {isAuthenticated ? <AuthenticatedSearchScreen /> : <LoggedOutLandingScreen />}
     </>
   );
 }

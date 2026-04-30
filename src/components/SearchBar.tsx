@@ -1,9 +1,9 @@
-import { useState, useContext, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import axios, { type AxiosResponse } from "axios";
 
 import {
-  RepoConsultingContext,
   type ILastSearchUser,
+  useRepoConsultingContext,
 } from "../contexts/RepoConsultingContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,14 +43,20 @@ const GITHUB_API_HEADERS = {
   "X-GitHub-Api-Version": "2022-11-28",
 };
 
-const MAX_USER_RESULTS = 5;
+const USERS_PER_PAGE = 10;
+const MAX_GITHUB_SEARCH_RESULTS = 1000;
+const FIRST_PAGE = 1;
 
 const SEARCH_FILTER_CHIPS = [
   "match: login",
   "type: user",
   "best match",
-  "top 5",
+  "top 10",
 ];
+
+interface LoadSearchPageOptions {
+  preserveResults?: boolean;
+}
 
 interface SearchBarProps {
   onUserSelected?: () => void;
@@ -81,34 +87,27 @@ export function SearchBar({ onUserSelected }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [searchedQuery, setSearchedQuery] = useState("");
   const [userResults, setUserResults] = useState<GitHubUserSearchItem[]>([]);
+  const [currentPage, setCurrentPage] = useState(FIRST_PAGE);
+  const [totalResults, setTotalResults] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedLogin, setSelectedLogin] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
-  const { insertNewSearch, repoIsOpen, starredIsOpen, activeStarred, activeRepo } =
-    useContext(RepoConsultingContext);
+  const latestSearchRequestId = useRef(0);
+  const { insertNewSearch } = useRepoConsultingContext();
 
-  function closeOpenPanels() {
-    if (repoIsOpen) {
-      activeRepo();
-    }
+  const totalPages =
+    totalResults === 0 ? 0 : Math.ceil(totalResults / USERS_PER_PAGE);
 
-    if (starredIsOpen) {
-      activeStarred();
-    }
-  }
+  async function loadSearchPage(
+    normalizedQuery: string,
+    page: number,
+    options: LoadSearchPageOptions = {}
+  ): Promise<void> {
+    const requestId = latestSearchRequestId.current + 1;
 
-  async function searchOnGitHub(): Promise<void> {
-    const normalizedQuery = query.trim();
-
-    if (normalizedQuery === "") {
-      return;
-    }
-
-    closeOpenPanels();
+    latestSearchRequestId.current = requestId;
     setIsSearching(true);
     setStatusMessage("");
-    setSearchedQuery(normalizedQuery);
-    setSelectedLogin(null);
 
     try {
       const res = await axios.get<GitHubUserSearchResponse>(
@@ -116,30 +115,88 @@ export function SearchBar({ onUserSelected }: SearchBarProps) {
         {
           params: {
             q: `${normalizedQuery} in:login type:user`,
-            per_page: MAX_USER_RESULTS,
-            page: 1,
+            per_page: USERS_PER_PAGE,
+            page,
           },
           headers: GITHUB_API_HEADERS,
         }
       );
-      const nextResults = res.data.items.slice(0, MAX_USER_RESULTS);
+      const nextResults = res.data.items.slice(0, USERS_PER_PAGE);
+      const nextTotalResults = Math.min(
+        res.data.total_count,
+        MAX_GITHUB_SEARCH_RESULTS
+      );
+
+      if (requestId !== latestSearchRequestId.current) {
+        return;
+      }
 
       setUserResults(nextResults);
+      setSearchedQuery(normalizedQuery);
+      setCurrentPage(page);
+      setTotalResults(nextTotalResults);
       setStatusMessage(
         nextResults.length === 0 ? "Nenhum usuario encontrado para esta busca." : ""
       );
-    } catch {
-      setUserResults([]);
-      setStatusMessage("Nao foi possivel buscar usuarios agora.");
-      toast.error("Nao foi possivel buscar usuarios agora.");
+    } catch (error) {
+      if (requestId !== latestSearchRequestId.current) {
+        return;
+      }
+
+      if (!options.preserveResults) {
+        setUserResults([]);
+        setTotalResults(0);
+      }
+
+      const statusCode = axios.isAxiosError(error) ? error.response?.status : undefined;
+      const nextStatusMessage =
+        statusCode === 403 || statusCode === 429
+          ? "Limite de buscas temporariamente atingido. Tente novamente em instantes."
+          : "Nao foi possivel buscar usuarios agora.";
+
+      setStatusMessage(nextStatusMessage);
+      toast.error(nextStatusMessage);
     } finally {
-      setIsSearching(false);
+      if (requestId === latestSearchRequestId.current) {
+        setIsSearching(false);
+      }
     }
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    void searchOnGitHub();
+
+    if (isSearching) {
+      return;
+    }
+
+    const normalizedQuery = query.trim().slice(0, 100);
+
+    if (normalizedQuery === "") {
+      return;
+    }
+
+    setSelectedLogin(null);
+    setSearchedQuery(normalizedQuery);
+    setCurrentPage(FIRST_PAGE);
+    setTotalResults(0);
+    setUserResults([]);
+
+    void loadSearchPage(normalizedQuery, FIRST_PAGE);
+  }
+
+  function handlePageChange(page: number): void {
+    if (
+      isSearching ||
+      searchedQuery === "" ||
+      page < FIRST_PAGE ||
+      page > totalPages ||
+      page === currentPage
+    ) {
+      return;
+    }
+
+    void loadSearchPage(searchedQuery, page, { preserveResults: true });
   }
 
   async function handleSelectUser(login: string): Promise<void> {
@@ -164,7 +221,7 @@ export function SearchBar({ onUserSelected }: SearchBarProps) {
   return (
     <>
       <ToastContainer />
-      <section className="mx-auto flex w-full max-w-[920px] flex-col gap-6 rounded-auth-card border border-auth-border bg-auth-card/90 p-5 shadow-auth-card backdrop-blur-md sm:p-8">
+      <section className="mx-auto flex w-full max-w-[920px] flex-col gap-6 overflow-hidden rounded-auth-card border border-auth-border bg-auth-card/90 p-5 shadow-auth-card backdrop-blur-md sm:p-8">
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
             <label
@@ -177,6 +234,7 @@ export function SearchBar({ onUserSelected }: SearchBarProps) {
               <input
                 id="github-user-search"
                 className="min-h-12 flex-1 rounded-auth-control border border-auth-border-strong bg-auth-terminal px-4 py-3 text-base text-auth-text-primary outline-none transition placeholder:text-auth-text-muted focus:border-auth-cyan focus:ring-2 focus:ring-auth-cyan/40"
+                maxLength={100}
                 type="text"
                 placeholder="Pesquise usuários do GitHub"
                 value={query}
@@ -217,8 +275,13 @@ export function SearchBar({ onUserSelected }: SearchBarProps) {
 
         <UserSearchResults
           results={userResults}
+          currentPage={currentPage}
+          totalResults={totalResults}
+          pageSize={USERS_PER_PAGE}
+          isLoading={isSearching}
           selectedLogin={selectedLogin}
           onSelect={handleSelectUser}
+          onPageChange={handlePageChange}
         />
 
       </section>
